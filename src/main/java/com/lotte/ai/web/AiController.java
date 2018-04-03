@@ -1,4 +1,4 @@
-package com.lotte.webservice.web;
+package com.lotte.ai.web;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lotte.webservice.web.vo.AnalysisImageVO;
+import com.lotte.ai.web.dto.AnalysisImageDTO;
 
 @RestController
-public class WebRestController {
-	
+public class AiController {
 	@GetMapping("/test")
 	public String test() {
 		System.out.println("get");
@@ -33,7 +32,7 @@ public class WebRestController {
 	}
 	
 	@PostMapping("/hello")
-	public List<AnalysisImageVO> hello(@RequestPart MultipartFile sourceFile, HttpServletRequest request) throws IOException {
+	public List<AnalysisImageDTO> hello(@RequestPart MultipartFile sourceFile, HttpServletRequest request) throws IOException {
 		System.out.println("ㅇㅇ?");
 		String sourceFileName = sourceFile.getOriginalFilename(); 
 		String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase(); 
@@ -49,9 +48,9 @@ public class WebRestController {
 		destinationFile.getParentFile().mkdirs();
 		sourceFile.transferTo(destinationFile);
 		
-		ArrayList<AnalysisImageVO> resultParam = new ArrayList<AnalysisImageVO>();
-		AnalysisImageVO result = new AnalysisImageVO().setTop1(1)
-													  .setTop1Pr(0.8);
+		ArrayList<AnalysisImageDTO> resultParam = new ArrayList<AnalysisImageDTO>();
+		AnalysisImageDTO result = new AnalysisImageDTO().setTop1(1)
+													  	.setTop1Pr(0.8);
 		System.out.println(result.toString());
 		resultParam.add(result);
 		return resultParam;

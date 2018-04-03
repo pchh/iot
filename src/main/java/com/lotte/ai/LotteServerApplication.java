@@ -1,12 +1,12 @@
-package com.lotte.webservice;
+package com.lotte.ai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LotteAiApplication {
+public class LotteServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LotteAiApplication.class, args);
+		SpringApplication.run(LotteServerApplication.class, args);
 	}
 }
