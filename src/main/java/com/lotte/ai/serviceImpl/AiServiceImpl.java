@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.lotte.ai.dto.AnalysisDTO;
 import com.lotte.ai.dto.AnalysisImageDTO;
 import com.lotte.ai.service.AiService;
 
@@ -19,7 +20,23 @@ public class AiServiceImpl implements AiService {
 	
 	private static final int OBJECT_NAME = 1;
 	private static final int OBJECT_PERCENT = 0;
+	private static String analysisSpeed;
 
+	@Override
+	public AnalysisDTO fileRecognize(String fileName) {
+		// 클라이언트 객체
+		Client client = new Client(fileName);
+		String receiveData = client.getResult();
+		System.out.println("결과 : " + receiveData);
+		String[] parseResult = getParseString(receiveData);
+		List<AnalysisImageDTO> imageData =  convertStringToDTO(parseResult);
+        AnalysisDTO resultData = new AnalysisDTO()
+                                .setImageData(imageData)
+                                .setAnalysisSpeed(analysisSpeed);
+		
+		return resultData;
+	}
+	
 	@Override
 	public String uploadFile(MultipartHttpServletRequest sourceFile) {
 		String filePath = "/home/tensorflow2018/datasets/shoes/fromusers";
@@ -34,20 +51,10 @@ public class AiServiceImpl implements AiService {
 		return fileName;
 	}
 
-	@Override
-	public List<AnalysisImageDTO> fileRecognize(String fileName) {
-		// 클라이언트 객체
-		Client client = new Client(fileName);
-		String receiveData = client.getResult();
-		System.out.println("결과 : " + receiveData);
-		String[] parseResult = getParseString(receiveData);
-		
-		return convertStringToDTO(parseResult);
-	}
-	
 	private static String[] getParseString(String str) {
-        str = str.substring(1, str.length() - 1).replace("},{", "/");
-        str = str.substring(1, str.length() - 1);
+        int objectEndIndex = str.indexOf(']');
+        analysisSpeed = str.substring(objectEndIndex + 2, str.length());
+        str = str.substring(2, objectEndIndex - 1).replace("},{", "/");
         StringTokenizer st = new StringTokenizer(str, "/");
         int tokenLength = st.countTokens();
 
@@ -64,9 +71,8 @@ public class AiServiceImpl implements AiService {
         for (int i = 0; i < length; i++) {
             String[] recognizedObject = result[i].split(", ");
             resultParam.add(new AnalysisImageDTO().setObjectName(recognizedObject[OBJECT_NAME])
-                       							  .setObjectPercent(recognizedObject[OBJECT_PERCENT]));
+                       .setObjectPercent(recognizedObject[OBJECT_PERCENT]));
         }
         return resultParam;
     }
-
 }

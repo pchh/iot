@@ -6,13 +6,14 @@
     <insert id="userRegist" parameterType="hashMap">
         INSERT INTO 
 			lotte.FACE_REGIST_INFO (
-				userName,
-				userBirthday,
-				userSex,
-				emotion,
-				registDate,
-				faceOriginName,
-				faceFakeName
+				user_name,
+				user_birthday,
+				user_sex,
+				emotion_value,
+				regist_date,
+				face_origin_name,
+				face_fake_name,
+				regist_count
 		) VALUES (
 				#{userName},
 				#{userBirthday},
@@ -20,14 +21,62 @@
 				#{emotion},
 				#{registDate},
 				#{faceOriginName},
-				#{faceFakeName}
+				#{faceFakeName},
+				#{registCount}
 		) ON DUPLICATE KEY UPDATE 
-				userName=#{userName},
-				userBirthday=#{userBirthday},
-				userSex=#{userSex},
-				emotion=#{emotion},
-				registDate=#{registDate},
-				faceOriginName=#{faceOriginName},
-				faceFakeName=#{faceFakeName}
+				user_name=#{userName},
+				user_birthday=#{userBirthday},
+				user_sex=#{userSex}
     </insert>
+    
+    <select id="emotionList" parameterType="hashMap" resultType="hashMap">
+    	SELECT 
+			C.CODE_ID AS 'CODE_ID', 
+			C.CODE_VALUE AS 'CODE_VALUE',
+			C.CODE_NM 'EMOTION_NAME',
+			C.CODE_DESC as 'EMOTION_DESC',
+			F.REGIST_DATE as 'REGIST_DATE',
+			F.REGIST_COUNT as 'REGIST_COUNT'
+		FROM 
+			COMMON_CODE C
+			LEFT JOIN (
+				select
+					* 
+				from
+					FACE_REGIST_INFO
+				where
+					user_name = #{userName} and
+					user_birthday = #{userBirthday} and
+					user_sex = #{userSex}
+			) F 
+			ON C.CODE_VALUE = F.EMOTION_VALUE
+		WHERE
+			C.CODE_ID = 'CMM_001';
+    </select>
+    
+    <update id="faceEmotionRegist" parameterType="hashMap">
+        INSERT INTO 
+			lotte.FACE_REGIST_INFO (
+				user_name,
+				user_birthday,
+				user_sex,
+				emotion_value,
+				regist_date,
+				face_origin_name,
+				face_fake_name,
+				regist_count
+		) VALUES (
+				#{userName},
+				#{userBirthday},
+				#{userSex},
+				#{emotion},
+				#{registDate},
+				#{faceOriginName},
+				#{faceFakeName},
+				#{registCount}
+		) ON DUPLICATE KEY UPDATE 
+				user_name=#{userName},
+				user_birthday=#{userBirthday},
+				user_sex=#{userSex}
+    </update>
 </mapper>

@@ -9,4 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface EmotionMapper {
 	int userRegist(HashMap<String, String> param);
+
+	List<HashMap<String, Object>> emotionList(HashMap<String, String> param);
+
+	int faceEmotionRegist(HashMap<String, String> param);
 }

@@ -19,4 +19,14 @@ public class EmotionServiceImpl implements EmotionService {
 	public int userRegist(HashMap<String, String> param) {
 		return mapper.userRegist(param);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> emotionList(HashMap<String, String> param) {
+		return mapper.emotionList(param);
+	}
+
+	@Override
+	public int faceEmotionRegist(HashMap<String, String> param) {
+		return mapper.faceEmotionRegist(param);
+	}
 }
