@@ -10,6 +10,7 @@ public class WebAppConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/files/**")
-        		.addResourceLocations("file:///c:/attach/");
+        		.addResourceLocations("file:///c:/attach/")
+        		.addResourceLocations("file:///c:/home/tensorflow2018/datasets/face/fromusers/");
     }
 }

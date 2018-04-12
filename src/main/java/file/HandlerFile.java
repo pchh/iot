@@ -21,6 +21,7 @@ public class HandlerFile {
 
 	private MultipartHttpServletRequest multipartRequest;
 	private String filePath;
+	private String fileName;
 	private Map<String, List<String>> fileNames;
 	private String oldName;
 	private HttpServletResponse resp;
@@ -34,6 +35,14 @@ public class HandlerFile {
 		this.filePath = filePath;
 		fileNames = new HashMap<String, List<String>>();
 	}
+	
+	// upload
+		public HandlerFile(MultipartHttpServletRequest multipartRequest, String filePath, String fileName) {
+			this.multipartRequest = multipartRequest;
+			this.filePath = filePath;
+			this.fileName = fileName;
+			fileNames = new HashMap<String, List<String>>();
+		}
 
 	// down
 	public HandlerFile(HttpServletResponse resp, String filePath, String saveName, String oldName) {
@@ -51,6 +60,10 @@ public class HandlerFile {
 	public Map<String, List<String>> getUploadFileName() {
 		upload();
 		return fileNames;
+	}
+	
+	public String getUploadFileName(String fileName) {
+		return uploadWithFileName(fileName);
 	}
 
 	// down
@@ -87,7 +100,12 @@ public class HandlerFile {
 			fileFullPath = filePath + "/" + saveFileName; // 파일 전체 경로
 			try {
 				// 파일 저장
-				mpf.transferTo(new File(fileFullPath));
+				File destinationFile = new File(fileFullPath);
+				if (!destinationFile.exists()) {
+					System.out.println("path : " + fileFullPath);
+					destinationFile.getParentFile().mkdirs();
+				}
+				mpf.transferTo(destinationFile);
 				oldNames.add(oldFileName);
 				saveNames.add(saveFileName);
 			} catch (Exception e) {
@@ -97,6 +115,27 @@ public class HandlerFile {
 		fileNames.put("oldNames", oldNames);
 		fileNames.put("saveNames", saveNames);
 	}
+	
+	// 파일 업로드 처리
+		private String uploadWithFileName(String fileName) {
+			Iterator<String> itr = multipartRequest.getFileNames();
+			while (itr.hasNext()) { // 받은 파일들을 모두 돌린다.
+				MultipartFile mpf = multipartRequest.getFile(itr.next());
+				fileFullPath = filePath + "/" + fileName; // 파일 전체 경로
+				try {
+					// 파일 저장
+					File destinationFile = new File(fileFullPath);
+					if (!destinationFile.exists()) {
+						System.out.println("path : " + fileFullPath);
+						destinationFile.getParentFile().mkdirs();
+					}
+					mpf.transferTo(destinationFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return fileFullPath;
+		}
 
 	// down
 	private void dowonload() {

@@ -4,37 +4,37 @@
 <mapper namespace="com.lotte.ai.mapper.EmotionMapper">
  
     <insert id="userRegist" parameterType="hashMap">
-        INSERT INTO 
-			lotte.FACE_REGIST_INFO (
-				user_name,
-				user_birthday,
-				user_sex,
-				emotion_value,
-				regist_date,
-				face_origin_name,
-				face_fake_name,
-				regist_count
-		) VALUES (
-				#{userName},
-				#{userBirthday},
-				#{userSex},
-				#{emotion},
-				#{registDate},
-				#{faceOriginName},
-				#{faceFakeName},
-				#{registCount}
-		) ON DUPLICATE KEY UPDATE 
-				user_name=#{userName},
-				user_birthday=#{userBirthday},
-				user_sex=#{userSex}
+	    INSERT INTO USER_INFO (
+			user_name,
+			user_birthday,
+			user_sex
+		) 
+		SELECT 
+			#{userName}, 
+			#{userBirthday}, 
+			#{userSex} 
+		FROM dual
+		WHERE
+			NOT EXISTS (
+				select 
+					user_name, 
+					user_birthday, 
+					user_sex 
+				from 
+					USER_INFO
+				where
+					user_name=#{userName} and
+					user_birthday=#{userBirthday} and
+					user_sex=#{userSex}
+			)
     </insert>
     
     <select id="emotionList" parameterType="hashMap" resultType="hashMap">
     	SELECT 
-			C.CODE_ID AS 'CODE_ID', 
-			C.CODE_VALUE AS 'CODE_VALUE',
-			C.CODE_NM 'EMOTION_NAME',
-			C.CODE_DESC as 'EMOTION_DESC',
+			C.code_id AS 'CODE_ID', 
+			C.code_value AS 'CODE_VALUE',
+			C.code_nm 'EMOTION_NAME',
+			C.code_desc as 'EMOTION_DESC',
 			F.REGIST_DATE as 'REGIST_DATE',
 			F.REGIST_COUNT as 'REGIST_COUNT'
 		FROM 
@@ -51,32 +51,75 @@
 			) F 
 			ON C.CODE_VALUE = F.EMOTION_VALUE
 		WHERE
-			C.CODE_ID = 'CMM_001';
+			C.CODE_ID = 'CMM_001'
+		ORDER BY
+			CODE_VALUE ASC
     </select>
     
-    <update id="faceEmotionRegist" parameterType="hashMap">
-        INSERT INTO 
-			lotte.FACE_REGIST_INFO (
-				user_name,
-				user_birthday,
-				user_sex,
-				emotion_value,
-				regist_date,
-				face_origin_name,
-				face_fake_name,
-				regist_count
-		) VALUES (
-				#{userName},
-				#{userBirthday},
-				#{userSex},
-				#{emotion},
-				#{registDate},
-				#{faceOriginName},
-				#{faceFakeName},
-				#{registCount}
-		) ON DUPLICATE KEY UPDATE 
-				user_name=#{userName},
-				user_birthday=#{userBirthday},
-				user_sex=#{userSex}
-    </update>
+    <insert id="faceFileReigst" parameterType="hashMap">
+    	<selectKey resultType="string" keyProperty="fileId" order="BEFORE">
+    		
+    		SELECT 
+				(
+					select distinct face_file_id from FACE_REGIST_INFO where USER_NAME=#{userName}
+				) as 'fileId'
+			FROM 
+				DUAL
+			WHERE 
+				EXISTS (
+					select distinct face_file_id from FACE_REGIST_INFO where USER_NAME=#{userName}
+				)
+				
+			UNION
+			
+			SELECT 
+				(
+					select 
+						IFNULL(MAX(face_file_id), 0) + 1 
+					from FACE_REGIST_FILE
+				)  as 'fileId'
+			FROM
+				DUAL
+			WHERE
+				NOT EXISTS (
+					select 
+						distinct face_file_id 
+					from 
+						FACE_REGIST_INFO 
+					where 
+						USER_NAME=#{userName}
+				)
+    	</selectKey>
+    	INSERT INTO
+    		FACE_REGIST_FILE (
+    			face_file_id,
+    			face_file_name	
+	    	) VALUES (
+	    		#{fileId},
+	    		#{fileName}
+	    	)
+    </insert>
+    
+    <insert id="faceEmotionRegist" parameterType="hashMap">
+	    INSERT INTO 
+				lotte.FACE_REGIST_INFO (
+					user_name,
+					user_birthday,
+					user_sex,
+					emotion_value,
+					regist_date,
+					face_file_id,
+					regist_count
+			) VALUES (
+					#{userName},
+					#{userBirthday},
+					#{userSex},
+					#{emotion},
+					now(),
+					#{fileId},
+					'1'
+			) ON DUPLICATE KEY UPDATE
+				face_file_id=#{fileId},
+				regist_count=regist_count+1
+    </insert>
 </mapper>

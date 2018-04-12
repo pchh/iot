@@ -13,4 +13,6 @@ public interface EmotionMapper {
 	List<HashMap<String, Object>> emotionList(HashMap<String, String> param);
 
 	int faceEmotionRegist(HashMap<String, String> param);
+	
+	int faceFileReigst(HashMap<String, String> param);
 }
