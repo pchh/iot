@@ -29,6 +29,16 @@
 			)
     </insert>
     
+    <select id="getEmotion" parameterType="hashMap" resultType="hashMap">
+	    SELECT
+			CODE_NM
+		FROM
+			COMMON_CODE
+		WHERE
+			CODE_ID = 'CMM_001' AND
+			CODE_VALUE = #{emotion}
+    </select>
+    
     <select id="emotionList" parameterType="hashMap" resultType="hashMap">
     	SELECT 
 			C.code_id AS 'CODE_ID', 
@@ -122,4 +132,6 @@
 				face_file_id=#{fileId},
 				regist_count=regist_count+1
     </insert>
+    
+    
 </mapper>

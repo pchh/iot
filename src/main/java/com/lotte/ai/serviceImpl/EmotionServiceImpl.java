@@ -3,8 +3,8 @@ package com.lotte.ai.serviceImpl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +29,7 @@ public class EmotionServiceImpl implements EmotionService {
 	
 	static {
 		gender = new HashMap<String, String>();
+		
 		gender.put("10", "남자");
 		gender.put("20", "여자");
 	}
@@ -67,11 +68,11 @@ public class EmotionServiceImpl implements EmotionService {
 		
 		HandlerFile handlerFile = new HandlerFile(sourceFile, FILE_PATH, fileName);
 		String resultFileName = handlerFile.getUploadFileName(fileName);
-		System.out.println(resultFileName);
+		HashMap<String, String> emotion = mapper.getEmotion(param);
 		
-		fileCopy(resultFileName, AGE_GROUP_FILE_PATH + "/" + fileName);
-		fileCopy(resultFileName, GENDER_FILE_PATH + "/" + fileName);
-		fileCopy(resultFileName, EMOTION_FILE_PATH + "/" + fileName);
+		fileCopy(resultFileName, AGE_GROUP_FILE_PATH + "/" + getAges(param.get("userBirthday")) + "/" + fileName);
+		fileCopy(resultFileName, GENDER_FILE_PATH + "/" + gender.get(param.get("userSex")) + "/" + fileName);
+		fileCopy(resultFileName, EMOTION_FILE_PATH + "/" + emotion.get("CODE_NM") + "/" + fileName);
 		
 		return fileName;
 	}
@@ -100,5 +101,18 @@ public class EmotionServiceImpl implements EmotionService {
 	    	e.printStackTrace();
 	    }
 	}
+	
+	public String getAges(String birthday) {
+        Calendar current = Calendar.getInstance();
+        int currentYear = current.get(Calendar.YEAR);
+        int currentAge = currentYear - Integer.parseInt(birthday.split("-")[0]) + 1;
+        if (currentAge >= 50) {
+        	return "50대 이상";
+        } else if (currentAge < 20) {
+        	return "기타";
+        } else {
+        	return (currentAge / 10 * 10) + "대";        	
+        }
+    }
 
 }
