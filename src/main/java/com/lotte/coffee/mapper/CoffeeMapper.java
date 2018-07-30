@@ -16,4 +16,5 @@ public interface CoffeeMapper {
 	List<CoffeeDTO> selectGoods();
 	int insertMenu(HashMap<String, String> param);
 	List<Map<String, String>> selectSales();
+	List<Map<String, String>> selectSales2();
 }
