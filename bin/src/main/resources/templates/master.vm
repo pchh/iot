@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>SB Admin - Start Bootstrap Template</title>
+  <!-- Bootstrap core CSS-->
+  <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="/resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="/resources/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">커피주문</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="/main">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">메인 페이지로</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">New Messages:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <strong>David Miller</strong>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <strong>Jane Smith</strong>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <strong>John Doe</strong>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item small" href="#">View all messages</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">New Alerts:</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-danger">
+                <strong>
+                  <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <span class="text-success">
+                <strong>
+                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
+              </span>
+              <span class="small float-right text-muted">11:21 AM</span>
+              <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item small" href="#">View all alerts</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">관리자페이지</a>
+        </li>
+        <li class="breadcrumb-item active">관리자페이지</li>
+      </ol>
+      <!-- Icon Cards-->
+           <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> 메뉴 리스트 </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>설명</th>
+                  <th>Small</th>
+                  <th>Regular</th>
+                  <th>Large</th>
+                  <th>휘핑</th>
+                  <th>샷</th>
+                </tr>
+              </thead>
+              <tbody>
+	  		    #foreach ($item in $coffeeDTOList)
+	                <tr>
+	                  <td>$!{item.coffeeName}</td>
+	                  <td>$!{item.remark}</td>
+	                  <td>$!{item.sprice}</td>
+	                  <td>$!{item.mprice}</td>
+	                  <td>$!{item.lprice}</td>
+	                  <td>$!{item.creamYn}</td>
+	                  <td>$!{item.shotYn}</td>
+	                </tr>
+				#end
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-1">
+                <label>커피명</label>
+                <input class="form-control" id="coffeeName" type="text" aria-describedby="nameHelp" placeholder="">
+              </div>
+              <div class="col-md-1">
+                <label>설명</label>
+                <input class="form-control" id="remark" type="text" aria-describedby="nameHelp" placeholder="">
+              </div>
+              <div class="col-md-1">
+                <label>small</label>
+                <input class="form-control" id="sprice" type="text" aria-describedby="nameHelp" placeholder="">
+              </div>
+              <div class="col-md-1">
+                <label>regular</label>
+                <input class="form-control" id="mprice" type="text" aria-describedby="nameHelp" placeholder="">
+              </div>
+              <div class="col-md-1">
+                <label>large</label>
+                <input class="form-control" id="lprice" type="text" aria-describedby="nameHelp" placeholder="">
+              </div>
+              <div class="col-md-1">
+                <label>휘핑여부</label>
+                <input class="form-control" id="creamYn" type="checkbox" placeholder="">
+              </div>
+              <div class="col-md-1">
+                <label>샷여부</label>
+                <input class="form-control" id="shotYn" type="checkbox" placeholder="">
+              </div>
+              <div class="col-md-2">
+                <label>판매시작일</label>
+                <input class="form-control" id="datepicker" type="text" placeholder="">
+              </div>
+              <div class="col-md-3">
+                <label>이미지</label>
+                <input class="form-control" id="image" type="file" name="upload" accept=".gif, .jpg , .png" onchange="this.select(); document.getElementById('filetext').value=document.selection.createRange().text.toString();">
+              </div>
+            </div>
+          </div>
+          <a id="btn-join" class="btn btn-primary btn-block">메뉴등록</a>
+        </form>
+      </div>
+      <!-- Area Chart Example-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+        <div class="card-body">
+          <canvas id="myAreaChart" width="100%" height="30"></canvas>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Example Bar Chart Card-->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-bar-chart"></i> Bar Chart Example</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-8 my-auto">
+                  <canvas id="myBarChart" width="100" height="50"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card Columns Example Social Feed-->
+          <!-- /Card Columns-->
+        </div>
+        <div class="col-lg-4">
+          <!-- Example Pie Chart Card-->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-pie-chart"></i> Pie Chart Example</div>
+            <div class="card-body">
+              <canvas id="myPieChart" width="100%" height="100"></canvas>
+            </div>
+          </div>
+          <!-- Example Notifications Card-->
+      <!-- Example DataTables Card-->
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Your Website 2018</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="/resources/vendor/chart.js/Chart.min.js"></script>
+    <script src="/resources/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/resources/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="/resources/js/sb-admin-datatables.min.js"></script>
+  </div>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+  	var ctx = document.getElementById("myAreaChart");
+	var myLineChart = new Chart(ctx, {
+	  type: 'line',
+	  data: {
+	    labels: [
+	      #foreach ($item in $hashMapList)
+		    "${item.COFFEE_NAME}" ,
+		  #end
+	    ],
+	    datasets: [{
+	      label: "Sessions",
+	      lineTension: 0.3,
+	      backgroundColor: "rgba(2,117,216,0.2)",
+	      borderColor: "rgba(2,117,216,1)",
+	      pointRadius: 5,
+	      pointBackgroundColor: "rgba(2,117,216,1)",
+	      pointBorderColor: "rgba(255,255,255,0.8)",
+	      pointHoverRadius: 5,
+	      pointHoverBackgroundColor: "rgba(2,117,216,1)",
+	      pointHitRadius: 20,
+	      pointBorderWidth: 2,
+	      data: [
+	      #foreach ($item in $hashMapList)
+		    $item.COUNT ,
+		  #end
+	      ],
+	    }],
+	  },
+	  options: {
+	    scales: {
+	      xAxes: [{
+	        time: {
+	          unit: 'date'
+	        },
+	        gridLines: {
+	          display: false
+	        },
+	        ticks: {
+	          maxTicksLimit: 7
+	        }
+	      }],
+	      yAxes: [{
+	        ticks: {
+	          min: 0,
+	          max: 20,
+	          maxTicksLimit: 5
+	        },
+	        gridLines: {
+	          color: "rgba(0, 0, 0, .125)",
+	        }
+	      }],
+	    },
+	    legend: {
+	      display: false
+	    }
+	  }
+	});
+	
+	var ctx = document.getElementById("myBarChart");
+	var myLineChart = new Chart(ctx, {
+	  type: 'bar',
+	  data: {
+	    labels: [
+	      #foreach ($item in $hashMapList)
+		    "${item.COFFEE_NAME}" ,
+		  #end
+	    ],
+	    datasets: [{
+	      label: "Revenue",
+	      backgroundColor: "rgba(2,117,216,1)",
+	      borderColor: "rgba(2,117,216,1)",
+	      data: [
+  	      #foreach ($item in $hashMapList)
+		    $item.COUNT ,
+		  #end
+	      ],
+	    }],
+	  },
+	  options: {
+	    scales: {
+	      xAxes: [{
+	        time: {
+	          unit: 'month'
+	        },
+	        gridLines: {
+	          display: false
+	        },
+	        ticks: {
+	          maxTicksLimit: 6
+	        }
+	      }],
+	      yAxes: [{
+	        ticks: {
+	          min: 0,
+	          max: 20,
+	          maxTicksLimit: 5
+	        },
+	        gridLines: {
+	          display: true
+	        }
+	      }],
+	    },
+	    legend: {
+	      display: false
+	    }
+	  }
+	});
+	
+	var ctx = document.getElementById("myPieChart");
+	var myPieChart = new Chart(ctx, {
+	  type: 'pie',
+	  data: {
+	    labels: [
+	    	#foreach ($item in $hashMapList)
+			    "${item.COFFEE_NAME}" ,
+			#end
+	    ],
+	    datasets: [{
+	      data: [
+			#foreach ($item in $hashMapList)
+		    	$item.COUNT ,
+		  	#end
+		],
+	      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+	    }],
+	  },
+	});
+	
+  jQuery( function() {
+    jQuery( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  
+	jQuery("#btn-join").on("click", function(event) {
+	
+		var image=jQuery("#image").val();
+		var startdate=jQuery("#datepicker").val();
+		var coffeeName=jQuery("#coffeeName").val();
+		var remark=jQuery("#remark").val();
+		var sprice=jQuery("#sprice").val();
+		var mprice=jQuery("#mprice").val();
+		var lprice=jQuery("#lprice").val();
+		if (jQuery('#shotYn').is(":checked")){
+			var shotYn="Y";
+		}else{
+			var shotYn="N";
+		}
+		if (jQuery('#creamYn').is(":checked")){
+			var creamYn="Y";
+		}else{
+			var creamYn="N";
+		}
+		
+		if(coffeeName ==""){
+			alert("커피명을 입력하세요");
+			return;
+		}
+		if(sprice =="" && mprice=="" && lprice==""){
+			alert("가격 하나는 입력해야됩니다");
+			return;
+		}
+		
+		var data = {coffeeName: coffeeName, remark: remark, image: image, startdate: startdate, 
+					sprice: sprice, mprice: mprice, lprice: lprice, creamYn: creamYn, shotYn: shotYn };
+		jQuery.ajax({ 
+			type:"POST", 
+			url: '/insertMenu',
+			contentType:'application/json',
+			data: JSON.stringify(data),
+			success : function(resData) {
+				window.location.href = '/master'
+				console.log(resData); 
+			}, 
+			error : function(xhr, status, e) {
+				console.log(e);
+				alert("입력실패했습니다.");
+			} 
+		});
+		
+  	})
+  </script>
+</body>
+
+</html>
+
