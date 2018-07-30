@@ -120,7 +120,7 @@
       <!-- Icon Cards-->
            <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> 메뉴 리스트 </div>
+          <i class="fa fa-table"></i> 라라 리스트 </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
