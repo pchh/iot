@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>SB Admin - Start Bootstrap Template</title>
+  <!-- Bootstrap core CSS-->
+  <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="/resources/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Register an Account</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">First name</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Last name</label>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Password</label>
+                <input class="form-control" id="exampleInputPassword1" maxLength="20" type="password" placeholder="Password">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleConfirmPassword">Confirm password</label>
+                <input class="form-control" id="exampleConfirmPassword" maxLength="20" type="password" placeholder="Confirm password">
+              </div>
+            </div>
+          </div>
+          <a id="btn-join" class="btn btn-primary btn-block">Register</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="login.html">Login Page</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/resources/vendor/jquery/jquery.min.js"></script>
+  <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script type="text/javascript">
+	jQuery("#btn-join").on("click", function(event) {
+		var str=jQuery("#exampleInputPassword1").val();
+		if(!chkPwd(str)){
+			return;
+		}
+		checkMemId();
+  		join();
+  	})
+  	function join(){
+  		event.preventDefault();
+		var mem_id=jQuery("#exampleInputEmail1").val();
+		var password=jQuery("#exampleInputPassword1").val();
+		var confirmPassword=jQuery("#exampleConfirmPassword").val();
+		var name=jQuery("#exampleInputName").val()+jQuery("#exampleInputLastName").val();
+		if(mem_id =="" || password ==""){
+			alert("아이디 또는 패스워드를 입력하세요");
+			return;
+		}
+		if(password != confirmPassword){
+			alert("두개의 비밀번호가 일치하지 않습니다");
+			return;
+		}
+		var data = {mem_id: mem_id, password: password, name: name};
+		jQuery.ajax({ 
+			type:"POST", 
+			url: '/insertMember',
+			contentType:'application/json',
+			data: JSON.stringify(data),
+			success : function(resData) {
+				window.location.href = '/main'
+				console.log(resData); 
+			}, 
+			error : function(xhr, status, e) {
+				console.log(e);
+				alert("아이디 비밀번호를 다시한번 확인해주세요");
+			} 
+		});
+  	}
+  	
+  	function checkMemId(){
+  		event.preventDefault();
+		var mem_id=jQuery("#exampleInputEmail1").val();
+		
+		if(mem_id ==""){
+			alert("아이디를 입력하세요");
+			return;
+		}
+		
+		jQuery.ajax({ 
+			type:"POST", 
+			url: '/checkMemId',
+			contentType:'application/json',
+			data: mem_id,
+			success : function(resData) {
+				console.log(resData); 
+			}, 
+			error : function(xhr, status, e) {
+				console.log(e);
+				alert("중복된 아이디입니다. 다른 아이디로 회원가입 해주세요.");
+				return;
+			} 
+		});
+  	}
+  	
+  	function chkPwd(str){
+		var reg_pwd = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+		if(!reg_pwd.test(str)){
+			alert('비밀번호를 확인하세요.(영문,숫자를 혼합하여 6~20자 이내)');    
+			jQuery('#exampleInputPassword1').val('');
+			jQuery('#exampleInputPassword1').focus();
+			return false;
+		}
+		return true;
+	}
+
+  </script>
+</body>
+
+</html>

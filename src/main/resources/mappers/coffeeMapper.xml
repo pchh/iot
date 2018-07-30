@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lotte.coffee.mapper.CoffeeMapper">
+ 
+ 	<select id="selectMember" parameterType="hashMap" resultType="hashMap">
+	    SELECT
+			MEM_ID ,
+			PASSWORD ,
+			NAME ,
+			MEMB_GB
+		FROM
+			TCUSTOMER
+		WHERE
+			   MEM_ID = #{mem_id}
+		  AND  PASSWORD = CryptTest.encrypt(#{password},'abc')
+    </select>
+    
+   	<insert id="insertMember" parameterType="hashMap" >
+	    INSERT INTO TCUSTOMER(
+    						MEM_ID ,
+						    PASSWORD ,
+						    NAME
+						     ) 
+				      VALUES(
+							#{mem_id} ,
+							CryptTest.encrypt(#{password},'abc') ,
+							#{name}
+						)
+    </insert>
+    
+   	<select id="checkExistMember" parameterType="String" resultType ="int" >
+	    SELECT COUNT(*)
+	      FROM TCUSTOMER
+	     WHERE MEM_ID=#{mem_id}
+    </select>
+    
+   	<select id="selectGoods" resultType="com.lotte.coffee.dto.CoffeeDTO">
+	    SELECT
+			COFFEE_NAME as COFFEENAME ,
+			SHOT_YN as SHOTYN ,
+			CREAM_YN as CREAMYN ,
+			IMG ,
+			SALE_START_DATE as SALESTARTDATE ,
+			REMARK ,
+			SPRICE ,
+			MPRICE ,
+			LPRICE
+		FROM
+			TCOFFEEMENU
+	   WHERE
+	       <![CDATA[ 
+	       SALE_START_DATE < SYSDATE
+	       ]]> 
+    </select>
+    
+  	<insert id="insertMenu" parameterType="hashMap" >
+	    INSERT INTO TCOFFEEMENU(
+    						COFFEE_NAME ,
+    						SHOT_YN,
+    						CREAM_YN,
+						    IMG ,
+						    SALE_START_DATE ,
+						    REMARK ,
+						    MODIFY_DATE ,
+						    MODIFY_ID ,
+						    INSERT_DATE ,
+						    INSERT_ID ,
+						    SPRICE ,
+						    MPRICE ,
+						    LPRICE 
+						     ) 
+				      VALUES(
+							#{coffeeName} ,
+							#{shotYn} ,
+							#{creamYn} ,
+							#{image} ,
+							#{startdate} ,
+							#{remark} ,
+							sysdate ,
+							'ch' ,
+							sysdate ,
+							'ch' ,
+							#{sprice} ,
+							#{mprice} ,
+							#{lprice}
+						)
+    </insert>
+    
+   	<select id="selectSales"  resultType="hashMap">
+	    SELECT
+			COFFEE_NAME ,
+			COUNT(*) AS COUNT
+		FROM
+			TORDERHIS
+		GROUP BY COFFEE_NAME
+    </select>
+</mapper>
