@@ -92,4 +92,24 @@ public class CoffeeController {
 		mav.setViewName("master");
 		return mav;
 	}
+	
+	@RequestMapping(value="/shortManage", method=RequestMethod.GET)
+	public ModelAndView shortManage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shortManage");
+		return mav;
+	}
+	
+	@RequestMapping(value="/info", method=RequestMethod.GET)
+	public ModelAndView info() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("info");
+		return mav;
+	}
+	@RequestMapping(value="/board", method=RequestMethod.GET)
+	public ModelAndView board() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board");
+		return mav;
+	}
 }
