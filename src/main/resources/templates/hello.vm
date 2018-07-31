@@ -2,179 +2,290 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
-  <!-- Bootstrap core CSS-->
-  <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <link href="/resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-  <!-- Custom styles for this template-->
-  <link href="/resources/css/sb-admin.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>SB Admin - Start Bootstrap Template</title>
+<!-- Bootstrap core CSS-->
+<link href="/resources/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="/resources/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<!-- Page level plugin CSS-->
+<link href="/resources/vendor/datatables/dataTables.bootstrap4.css"
+	rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="/resources/css/sb-admin.css" rel="stylesheet">
+<!-- 음원 UI 추가 -->
+<!-- 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+ -->
+<link href='http://fonts.googleapis.com/css?family=Lobster'
+	rel='stylesheet' type='text/css'>
+<script src="http://code.jQuery.com/jQuery-latest.js"
+	type="text/javascript"></script>
+<script type="text/javascript" src="js/html5slider.js"></script>
+<script src="/resources/js/getWeather.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">커피 주문</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="/master">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">관리자페이지로</span>
-          </a> 
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <!-- Icon Cards-->
-           <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i> 메뉴 리스트</div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>설명</th>
-                  <th>Small</th>
-                  <th>Regular</th>
-                  <th>Large</th>
-                  <th>휘핑</th>
-                  <th>샷</th>
-                  <th>이미지</th>
-                </tr>
-              </thead>
-              <tbody>
-	  		    #foreach ($item in $coffeeDTOList)
-	                <tr>
-	                  <td>
-	                  <div>
-		                <input class="form-control" id="test" type="checkbox">
-		              </div>
-	                  $!{item.coffeeName}
-	                  </td>
-	                  <td>$!{item.remark}</td>
-	                  <td>
-	                  #if( "$!{item.sprice}" != "")
-						<input type="radio" name="chk_price" value="sprice">$!{item.sprice}3123123
-	                  #end
-	                  </td>
-	                  <td>
-	                  #if( "$!{item.mprice}" != "")
-						<input type="radio" name="chk_price" value="mprice">$!{item.mprice}
-	                  #end
-	                  </td>
-	                  <td>
-	                  #if( "$!{item.lprice}" != "")
-						<input type="radio" name="chk_price" value="lprice">$!{item.lprice}
-	                  #end
-	                  </td>
-	                  <td>
-	                  	#if($!{item.creamYn} == "N")
-	                  		x
-	                  	#else
-		                  	<div>
-				                <input id="creamYn" type="checkbox" disabled=true >
-			              	</div>
-	                  	#end
-	                  </td>
-	                  <td>
-  	                  	#if($!{item.shotYn} == "N")
-	                  		x
-	                  	#else
-		                  	<div>
-				                <input id="shotYn" type="checkbox" disabled=true >
-			              	</div>
-	                  	#end
-	                  </td>
-	                  <td>
-	                  	<img src=$!{item.img} border="0" alt="">
-	                  </td>
-	                </tr>
-				#end
-              </tbody>
-            </table>
-			<a id="btn-join" class="btn btn-primary btn-block">주문하기</a>
-          </div>
-        </div>
-      </div>
-    </div>
-          <!-- Example Notifications Card-->
-      <!-- Example DataTables Card-->
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="/resources/vendor/jquery/jquery.min.js"></script>
-    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="/resources/vendor/chart.js/Chart.min.js"></script>
-    <script src="/resources/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/resources/vendor/datatables/dataTables.bootstrap4.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="/resources/js/sb-admin.min.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="/resources/js/sb-admin-datatables.min.js"></script>
-  </div>
-  <script type="text/javascript">
-  </script>
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+		id="mainNav">
+		<a class="navbar-brand" href="index.html">커피 주문</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button"
+			data-toggle="collapse" data-target="#navbarResponsive"
+			aria-controls="navbarResponsive" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="Dashboard"><a class="nav-link" href="/master"> <i
+						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">관리자페이지로</span>
+				</a></li>
+			</ul>
+			<ul class="navbar-nav sidenav-toggler">
+				<li class="nav-item"><a class="nav-link text-center"
+					id="sidenavToggler"> <i class="fa fa-fw fa-angle-left"></i>
+				</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" data-toggle="modal"
+					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+
+			<!-- Icon Cards-->
+			<!--  DashBoard Example-->
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-table"></i>DashBoard
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+
+						온습도,미세먼지 대시보드 내용
+						<script type="text/javascript">
+						
+						public class VillageWeatherParsing {
+
+						    public static void main(String[] args) {
+						        try{
+						        	/*요청정보입력
+						        	 * 아래와 같은 정보들은 사용자 가이드를 확인하여 찾아주시면 됩니다.
+						        	 * 위도 경도는 엑셀파일 안에 있습니다.
+						        	 * */
+						        	 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+						        	 Date date = new Date();
+						        	 System.out.println(dateFormat.format(date));
+						            //자신이 조회를 원하는 지역의 경도와 위도를 입력해주세요
+						            String nx = "92";  //경도
+						            String ny = "131";   //위도
+						            String baseDate = "20180502"; // 자신이 조회하고싶은 날짜를 입력해주세요
+						            String baseTime = "0500"; //자신이 조회하고싶은 시간대를 입력해주세요
+						            // 서비스 인증키입니다. 공공데이터포털에서 제공해준 인증키를 넣어주시면 됩니다.
+						            String serviceKey = "vHm4Ut%2BxDEeYDZtlo4kSHSfttBx%2BwLdut1DJczPOQrMdpElL%2Fa2aHv%2Fnli%2BjRea52kLwh%2FrRNEZgRJ2QBc3Svg%3D%3D";
+						            
+						            // 정보를 모아서 URL정보를 만들면됩니다. 맨 마지막 "&amp;_type=json"에 따라 반환 데이터의 형태가 정해집니다.
+						            String urlStr = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData?"
+						            		+ "serviceKey=" + serviceKey + "&amp;base_date=" + baseDate + "&amp;base_time=" + baseTime
+						            		+ "&amp;nx="+ nx + "&amp;ny=" + ny + "&amp;_type=json";
+						            URL url = new URL(urlStr); // 위 urlStr을 이용해서 URL 객체를 만들어줍니다.
+						            BufferedReader bf;
+						            String line = "";
+						            String result="";
+
+						            //날씨 정보를 받아옵니다.
+						            bf = new BufferedReader(new InputStreamReader(url.openStream()));
+
+						            //버퍼에 있는 정보를 하나의 문자열로 변환.
+						            while((line=bf.readLine())!=null){
+						                result=result.concat(line);
+						               // System.out.println(result);  // 받아온 데이터를 확인해봅니다.
+						            }
+						           
+						             // Json parser를 만들어 만들어진 문자열 데이터를 객체화 합니다. 
+						    		JSONParser parser = new JSONParser();
+						    		JSONObject obj = (JSONObject) parser.parse(result);
+						    		
+						    		// Top레벨 단계인 response 키를 가지고 데이터를 파싱합니다.
+						    		JSONObject parse_response = (JSONObject) obj.get("response");
+						    		// response 로 부터 body 찾아옵니다.
+						    		JSONObject parse_body = (JSONObject) parse_response.get("body");
+						    		// body 로 부터 items 받아옵니다.
+						    		JSONObject parse_items = (JSONObject) parse_body.get("items");
+						    		
+						    		// items로 부터 itemlist 를 받아오기 itemlist : 뒤에 [ 로 시작하므로 jsonarray이다
+						    		JSONArray parse_item = (JSONArray) parse_items.get("item");
+						    		
+						    		String category;
+						    		JSONObject weather; // parse_item은 배열형태이기 때문에 하나씩 데이터를 하나씩 가져올때 사용합니다.
+
+						    		// 필요한 데이터만 가져오려고합니다.
+						    		for(int i = 0 ; i &lt; parse_item.size(); i++)
+						    		{
+						    			weather = (JSONObject) parse_item.get(i);
+						    			//String base_Date = (String)weather.get("baseDate");
+						    			//String fcst_Time = (String)weather.get("fcstDate");
+						    			double fcst_Value = ((Long)weather.get("fcstValue")).doubleValue(); //실수로된 값과 정수로된 값이 둘다 있어서 실수로 통일했습니다.
+						    			//String nX = (String)weather.get("nx");
+						    			//String nY = (String)weather.get("ny");
+						    			category = (String)weather.get("category");
+						    			//String base_Time = (String)weather.get("baseTime");
+						    			//String fcscDate = (String)weather.get("fcscDate");
+						    			
+						    			// 출력합니다.
+						    			System.out.print("배열의 "+i+"번째 요소");
+						    			System.out.print("   category : "+ category);
+						    			System.out.print("   fcst_Value : "+ fcst_Value);
+						    			System.out.println();
+						    		}
+						    		// 마지막에보면 에러가 발생하였는데 casting문제입니다. 
+						    		// 이는 반환되는 데이터타입이 달라서인데 이번 글에서는 여기까지만하고
+						    		// 데이터베이스에 입력할때는 수정해서 하겠습니다.
+						    		
+
+						            bf.close();
+						        }catch(Exception e){
+						            System.out.println(e.getMessage());
+						        }
+						    }
+
+						}
+
+						</script>
+
+					</div>
+
+
+				</div>
+			</div>
+			<!-- Area Button Example-->
+			<div>
+				<a id="btn-join" class="btn btn-primary btn-lg">장기</a>
+				 <a id="btn-join" class="btn btn-primary btn-lg">단기</a>
+
+			</div>
+			<!-- Area MUSIC Example-->
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-area-chart"></i>MUSIC
+
+				</div>
+				<div class="card-body">
+					<canvas id="myAreaChart" width="100%" height="30"></canvas>
+					<div class="col-md-12">
+						<audio id="audio" preload="auto"></audio>
+						<h1>HTML 5 Audio Player</h1>
+						<audio controls="controls">
+							<source src="track.ogg" type="audio/ogg" />
+							<source src="track.mp3" type="audio/mpeg" />
+							Your browser does not support the audio element.
+						</audio>
+
+
+					</div>
+
+				</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-8">
+						<!-- Example Bar Chart Card-->
+						<div class="card mb-3">
+							<div class="card-header">
+								<i class="fa fa-bar-chart"></i> Bar Chart Example
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-8 my-auto">
+										<canvas id="myBarChart" width="100" height="50"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Card Columns Example Social Feed-->
+						<!-- /Card Columns-->
+					</div>
+					<div class="col-lg-4">
+						<!-- Example Pie Chart Card-->
+						<div class="card mb-3">
+							<div class="card-header">
+								<i class="fa fa-pie-chart"></i> Pie Chart Example
+							</div>
+							<div class="card-body">
+								<canvas id="myPieChart" width="100%" height="100"></canvas>
+							</div>
+						</div>
+						<!-- Example Notifications Card-->
+						<!-- Example DataTables Card-->
+						<!-- /.container-fluid-->
+						<!-- /.content-wrapper-->
+						<footer class="sticky-footer">
+							<div class="container">
+								<div class="text-center">
+									<small>Copyright © Your Website 2018</small>
+								</div>
+							</div>
+						</footer>
+						<!-- Scroll to Top Button-->
+						<a class="scroll-to-top rounded" href="#page-top"> <i
+							class="fa fa-angle-up"></i>
+						</a>
+						<!-- Logout Modal-->
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Ready to
+											Leave?</h5>
+										<button class="close" type="button" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+									</div>
+									<div class="modal-body">Select "Logout" below if you are
+										ready to end your current session.</div>
+									<div class="modal-footer">
+										<button class="btn btn-secondary" type="button"
+											data-dismiss="modal">Cancel</button>
+										<a class="btn btn-primary" href="login.html">Logout</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Bootstrap core JavaScript-->
+						<script src="/resources/vendor/jquery/jquery.min.js"></script>
+						<script
+							src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+						<!-- Core plugin JavaScript-->
+						<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+						<!-- Page level plugin JavaScript-->
+						<script src="/resources/vendor/chart.js/Chart.min.js"></script>
+						<script src="/resources/vendor/datatables/jquery.dataTables.js"></script>
+						<script
+							src="/resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+						<!-- Custom scripts for all pages-->
+						<script src="/resources/js/sb-admin.min.js"></script>
+						<!-- Custom scripts for this page-->
+						<script src="/resources/js/sb-admin-datatables.min.js"></script>
+					</div>
+					<script type="text/javascript">
+			
+		</script>
 </body>
 
 </html>
