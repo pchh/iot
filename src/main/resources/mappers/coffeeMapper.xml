@@ -4,15 +4,14 @@
  
  	<select id="selectMember" parameterType="hashMap" resultType="hashMap">
 	    SELECT
-			MEM_ID ,
-			PASSWORD ,
-			NAME ,
-			MEMB_GB
+			LOGIN_ID ,
+			LOGIN_PW ,
+			HUMAN_ID 
 		FROM
-			TCUSTOMER
+			WORK_USER
 		WHERE
-			   MEM_ID = #{mem_id}
-		  AND  PASSWORD = CryptTest.encrypt(#{password},'abc')
+			   LOGIN_ID = #{mem_id}
+		  AND  LOGIN_PW = #{password}
     </select>
     
    	<insert id="insertMember" parameterType="hashMap" >
