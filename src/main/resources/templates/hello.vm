@@ -74,7 +74,13 @@
 
 						온습도,미세먼지 대시보드 내용
 						<script type="text/javascript">
-						
+						function rplLine(value){
+						    if (value != null && value != "") {
+						        return value.replace(/\n/g, "\\n");
+						    }else{
+						        return value;
+						    }
+						}
 						function realTimeWeather() {
 						    
 						    var today = new Date();
@@ -84,7 +90,7 @@
 						    var day = today.getDate();
 						    var hours = today.getHours();
 						    var minutes = today.getMinutes();
-						 	console.log(month +"월 " + day + "일 " + week[today.getDay()]+"요일");
+						 
 						    $('.weather-date').html(month +"월 " + day + "일 " + week[today.getDay()]+"요일");
 						 
 						    /*
@@ -118,10 +124,10 @@
 						    } 
 						 
 						    today = year+""+month+""+day;
-					
+							
 						    /* 좌표 */
-						    var _nx = 62, 
-						    _ny = 118,
+						    var _nx = 60, 
+						    _ny = 127,
 						    apikey = "6Pt91UWttrq6am20E3F5PLobj1fnoc0rGaui%2FIhwAi5A2u7l2Jck9qU8giLCG7aDmCeFrw5PwSPloKeOcbuUyg%3D%3D",
 						    ForecastGribURL = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData";
 						    ForecastGribURL += "?ServiceKey=" + apikey;
@@ -131,16 +137,25 @@
 						    ForecastGribURL += "&pageNo=1&numOfRows=7";
 						    ForecastGribURL += "&_type=json";
 						 	console.log(ForecastGribURL);
-						 	console.log();
-						   	jQuery.ajax({
-						    url: ForecastGribURL
-						    ,type: 'get'
-						    ,success: function(msg) {
 						 	
-						       var text = msg.responseText,
-						       text = text.replace(/(<([^>]+)>)/ig,''); //HTML 태그 모두 공백으로 대체
-						 		text = '[' + text + ']';
-						       var json = $.parseJSON(text);
+						 	
+						   	jQuery.ajax({
+						   		type: 'GET'
+						    	,url: ForecastGribURL
+						    	,cache: false
+						    	,success: function(msg) {
+						 		
+						       //var text = msg.responseText;
+						      var myXML = rplLine(msg.responseText);
+						      
+					            var indexS = myXML.indexOf('"body":{"items":{"item":'),
+					                indexE = myXML.indexOf("}]}"),
+					                result = myXML;
+						       //text = text.replace(/(<([^>]+)>)/gi,''); //HTML 태그 모두 공백으로 대체 */
+						       text = '[' + result + ']';
+						       
+						       var json = jQuery.parseJSON(text);
+						       
 						       
 						       var rain_state = json[0].response.body.items.item[1].obsrValue;
 						       var rain = json[0].response.body.items.item[3].obsrValue;
