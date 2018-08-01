@@ -145,14 +145,14 @@
 						    	,cache: false
 						    	,success: function(msg) {
 						 		
-						       //var text = msg.responseText;
-						      var myXML = rplLine(msg.responseText);
+						       var text = msg.responseText;
+						      /* var myXML = rplLine(msg.responseText);
 						      
 					            var indexS = myXML.indexOf('"body":{"items":{"item":'),
 					                indexE = myXML.indexOf("}]}"),
-					                result = myXML;
-						       //text = text.replace(/(<([^>]+)>)/gi,''); //HTML 태그 모두 공백으로 대체 */
-						       text = '[' + result + ']';
+					                result = myXML; */
+						       text = text.replace(/(<([^>]+)>)/gi,''); //HTML 태그 모두 공백으로 대체 */
+						       text = '[' + text + ']';
 						       
 						       var json = jQuery.parseJSON(text);
 						       
