@@ -1,14 +1,12 @@
 package com.lotte.coffee.dto;
 
-import java.util.Date;
-
 public class NoticeBoardDTO {
 	private int Num;              // Index
 	private String Title;         // 제목
 	private String Contents;      // 내용
 	private String Menu_Group_ID; // 장기,단기
 	private String Name;          // 이름
-	private String Work_Data;     // 등록일자
+	private String Work_Date;     // 등록일자
 	private String Hand_Phone;    // 전화번호
 	private String Resigt_ID;     // 생년월일
 	private String User_Group_ID; // 기수
@@ -61,11 +59,11 @@ public class NoticeBoardDTO {
 	public void setName(String name) {
 		Name = name;
 	}
-	public String getWork_Data() {
-		return Work_Data;
+	public String getWork_Date() {
+		return Work_Date;
 	}
-	public void setWork_Data(String work_Data) {
-		Work_Data = work_Data;
+	public void setWork_Date(String work_Date) {
+		Work_Date = work_Date;
 	}
 	
 }

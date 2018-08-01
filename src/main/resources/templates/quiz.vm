@@ -223,26 +223,19 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성일자</th>
-                </tr>
-              </thead>
-              <tbody>
-	              #foreach($item in $noticeBoardDTOList)
-	                <tr>
-	              		<td>$item.title</td>
-	                    <td>$item.name</td>
-	                    <td>$item.Work_Date</td>
-	                </tr>
-	              #end
-              </tbody>
-            </table>
-          </div>
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <button id="btn_bt">퀴즈퀴즈</button>
+        </li>
+      </ol>
+      #foreach($item in $quizDTOList)
+      	<label>${item.Contents}</label>
+	    <ul>
+		    <input type="radio" name=${item.ID} value="Apple" checked>O
+		    <input type="radio" name=${item.ID} value="Grape">X
+	    </ul>
+      #end
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -288,7 +281,15 @@
     <script src="/resources/js/sb-admin-datatables.min.js"></script>
   </div>
 	<script type="text/javascript">
-	</script>
+	jQuery("#btn_bt").on("click", function(event) {
+  		jQuery("#gosu").css("display","none");
+  		jQuery("#bt").css("display","block");
+  	})
+	jQuery("#btn_gosu").on("click", function(event) {
+  		jQuery("#bt").css("display","none");
+  		jQuery("#gosu").css("display","block");
+  	})
+  </script>
 </body>
 
 </html>

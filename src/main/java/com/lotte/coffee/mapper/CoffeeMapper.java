@@ -7,6 +7,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lotte.coffee.dto.CoffeeDTO;
+import com.lotte.coffee.dto.NoticeBoardDTO;
+import com.lotte.coffee.dto.QuizDTO;
 
 @Mapper
 public interface CoffeeMapper {
@@ -17,4 +19,6 @@ public interface CoffeeMapper {
 	int insertMenu(HashMap<String, String> param);
 	List<Map<String, String>> selectSales();
 	List<Map<String, String>> selectSales2();
+	List<QuizDTO> selectQuiz();
+	List<NoticeBoardDTO> selectBoard(String menuGroupId);
 }

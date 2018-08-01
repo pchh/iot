@@ -92,4 +92,24 @@
 			TORDERHIS
 		GROUP BY COFFEE_NAME
     </select>
+    
+    <select id="selectQuiz"  resultType="com.lotte.coffee.dto.QuizDTO">
+	    SELECT
+			ID ,
+			CONTENTS , 
+			CORRECT
+		FROM
+			INFO_QUIZ
+    </select>
+    
+     <select id="selectBoard"  resultType="com.lotte.coffee.dto.NoticeBoardDTO">
+	    SELECT TA.TITLE ,
+	    	   TA.WORK_DATE ,
+	    	   TB.NAME 
+	     FROM INFO_NOTICE_BOARD TA ,
+	          INFO_HUMAN TB 
+	    WHERE TA.MENU_GROUP_ID=#{menuGroupId} 
+	      AND TA.REGIST_USER=TB.HUMAN_ID
+
+    </select>
 </mapper>

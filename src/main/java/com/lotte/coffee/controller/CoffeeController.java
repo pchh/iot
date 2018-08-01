@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotte.coffee.dto.CoffeeDTO;
+import com.lotte.coffee.dto.NoticeBoardDTO;
+import com.lotte.coffee.dto.QuizDTO;
 import com.lotte.coffee.service.CoffeeService;
 
 @Controller
@@ -105,10 +108,22 @@ public class CoffeeController {
 		mav.setViewName("info");
 		return mav;
 	}
-	@RequestMapping(value="/board", method=RequestMethod.GET)
-	public ModelAndView board() {
+	@ResponseBody
+	@RequestMapping(value="/board/{menuGroupId}", method=RequestMethod.GET)
+	public ModelAndView board(@PathVariable("menuGroupId") String menuGroupId){
 		ModelAndView mav = new ModelAndView();
+		List<NoticeBoardDTO> boardList = service.selectBoard(menuGroupId);
+		mav.addObject(boardList);
 		mav.setViewName("board");
+		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value="/quiz", method=RequestMethod.GET)
+	public ModelAndView quiz() {
+		ModelAndView mav = new ModelAndView();
+		List<QuizDTO> quizList = service.selectQuiz();
+		mav.addObject(quizList);
+		mav.setViewName("quiz");
 		return mav;
 	}
 }

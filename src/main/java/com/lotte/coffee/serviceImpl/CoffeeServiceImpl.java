@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lotte.coffee.dto.CoffeeDTO;
+import com.lotte.coffee.dto.NoticeBoardDTO;
+import com.lotte.coffee.dto.QuizDTO;
 import com.lotte.coffee.mapper.CoffeeMapper;
 import com.lotte.coffee.service.CoffeeService;
 
@@ -40,6 +42,14 @@ public class CoffeeServiceImpl implements CoffeeService {
 	@Override
 	public List<Map<String, String>> selectSales() {
 		return mapper.selectSales();
+	}
+	@Override
+	public List<QuizDTO> selectQuiz() {
+		return mapper.selectQuiz();
+	}
+	@Override
+	public List<NoticeBoardDTO> selectBoard(String menuGroupId) {
+		return mapper.selectBoard(menuGroupId);
 	}
 
 }
