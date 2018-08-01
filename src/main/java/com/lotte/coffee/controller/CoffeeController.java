@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,11 +23,12 @@ public class CoffeeController {
 	
 	@ResponseBody
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public ModelAndView main() {
+	public ModelAndView main(@RequestParam Map<String, String> param) {
 		ModelAndView mav = new ModelAndView();
 		List<CoffeeDTO> goodsList = service.selectGoods();
 		mav.setViewName("hello");
 		mav.addObject(goodsList);
+		mav.addAllObjects(param);
 		return mav;
 	}
 	
@@ -50,13 +52,10 @@ public class CoffeeController {
 		return mav;
 	}
 	@RequestMapping(value="/logintest", method=RequestMethod.POST)
-	public ModelAndView loginTest(@RequestBody HashMap<String, String> param) {
- 		ModelAndView mav = new ModelAndView();
+	@ResponseBody
+	public Map<String, String> loginTest(@RequestBody HashMap<String, String> param) {
 		Map<String, String> member = service.selectMember(param);
-		mav.setViewName("hello");
-//		mav.addObject("membgb",member.get("MEMB_GB"));
-		mav.addObject(member);
-		return mav;
+		return member;
 	}
 	@RequestMapping(value="/insertMember", method=RequestMethod.POST)
 	public ModelAndView insertMember(@RequestBody HashMap<String, String> param) {

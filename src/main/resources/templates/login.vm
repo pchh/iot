@@ -70,7 +70,7 @@
 			contentType:'application/json',
 			data: JSON.stringify(data),
 			success : function(resData) {
-				window.location.href = '/main'
+				window.location.href = '/main?'+jQuery.param(resData);
 				console.log(resData); 
 			}, 
 			error : function(xhr, status, e) {

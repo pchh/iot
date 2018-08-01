@@ -5,7 +5,6 @@
  	<select id="selectMember" parameterType="hashMap" resultType="hashMap">
 	    SELECT
 			LOGIN_ID ,
-			LOGIN_PW ,
 			HUMAN_ID 
 		FROM
 			WORK_USER
