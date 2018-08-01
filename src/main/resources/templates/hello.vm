@@ -84,7 +84,7 @@
 						    var day = today.getDate();
 						    var hours = today.getHours();
 						    var minutes = today.getMinutes();
-						 
+						 	console.log(month +"월 " + day + "일 " + week[today.getDay()]+"요일");
 						    $('.weather-date').html(month +"월 " + day + "일 " + week[today.getDay()]+"요일");
 						 
 						    /*
@@ -118,12 +118,12 @@
 						    } 
 						 
 						    today = year+""+month+""+day;
-						    
+					
 						    /* 좌표 */
-						    var _nx = 127.0909732, 
-						    _ny = 37.1567938,
-						    apikey = "vHm4Ut%2BxDEeYDZtlo4kSHSfttBx%2BwLdut1DJczPOQrMdpElL%2Fa2aHv%2Fnli%2BjRea52kLwh%2FrRNEZgRJ2QBc3Svg%3D%3D",    
-						    ForecastGribURL = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastGrib";
+						    var _nx = 62, 
+						    _ny = 118,
+						    apikey = "6Pt91UWttrq6am20E3F5PLobj1fnoc0rGaui%2FIhwAi5A2u7l2Jck9qU8giLCG7aDmCeFrw5PwSPloKeOcbuUyg%3D%3D",
+						    ForecastGribURL = "http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastSpaceData";
 						    ForecastGribURL += "?ServiceKey=" + apikey;
 						    ForecastGribURL += "&base_date=" + today;
 						    ForecastGribURL += "&base_time=" + hours +"00";
@@ -131,6 +131,7 @@
 						    ForecastGribURL += "&pageNo=1&numOfRows=7";
 						    ForecastGribURL += "&_type=json";
 						 	console.log(ForecastGribURL);
+						 	console.log();
 						   	jQuery.ajax({
 						    url: ForecastGribURL
 						    ,type: 'get'
