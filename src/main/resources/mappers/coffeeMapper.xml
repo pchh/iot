@@ -109,7 +109,8 @@
      <select id="selectBoard"  resultType="com.lotte.coffee.dto.NoticeBoardDTO">
 	    SELECT TA.TITLE ,
 	    	   TA.WORK_DATE ,
-	    	   TB.NAME 
+	    	   TB.NAME ,
+	    	   TB.USER_GROUP_ID
 	     FROM INFO_NOTICE_BOARD TA ,
 	          INFO_HUMAN TB 
 	    WHERE TA.MENU_GROUP_ID=#{menuGroupId} 

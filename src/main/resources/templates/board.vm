@@ -236,7 +236,7 @@
 	              #foreach($item in $noticeBoardDTOList)
 	                <tr>
 	              		<td>$item.title</td>
-	                    <td>$item.name</td>
+	                    <td>$item.User_Group_ID $item.name</td>
 	                    <td>$item.Work_Date</td>
 	                </tr>
 	              #end
