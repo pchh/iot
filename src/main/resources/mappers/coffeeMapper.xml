@@ -4,13 +4,17 @@
  
  	<select id="selectMember" parameterType="hashMap" resultType="hashMap">
 	    SELECT
-			LOGIN_ID ,
-			HUMAN_ID 
+			A.LOGIN_ID ,
+			A.HUMAN_ID ,
+			B.NAME,
+			B.USER_GROUP_ID
 		FROM
-			WORK_USER
+			WORK_USER A,
+			INFO_HUMAN B
 		WHERE
-			   LOGIN_ID = #{mem_id}
-		  AND  LOGIN_PW = #{password}
+			   A.LOGIN_ID = #{mem_id}
+		  AND  A.LOGIN_PW = #{password}
+		  AND  A.HUMAN_ID = B.HUMAN_ID
     </select>
     
    	<insert id="insertMember" parameterType="hashMap" >
