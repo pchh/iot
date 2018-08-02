@@ -55,4 +55,12 @@ public class CoffeeServiceImpl implements CoffeeService {
 	public int insertBoard(HashMap<String, String> param) {
 		return mapper.insertBoard(param);
 	}
+	@Override
+	public int updateBoard(HashMap<String, String> param) {
+		return mapper.updateBoard(param);
+	}
+	@Override
+	public int deleteBoard(HashMap<String, String> param) {
+		return mapper.deleteBoard(param);
+	}
 }

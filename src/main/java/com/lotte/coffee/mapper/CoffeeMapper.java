@@ -22,4 +22,6 @@ public interface CoffeeMapper {
 	List<QuizDTO> selectQuiz();
 	List<NoticeBoardDTO> selectBoard(String menuGroupId);
 	int insertBoard(HashMap<String, String> param);
+	int updateBoard(HashMap<String, String> param);
+	int deleteBoard(HashMap<String, String> param);
 }

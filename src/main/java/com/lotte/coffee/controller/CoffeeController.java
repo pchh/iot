@@ -144,4 +144,20 @@ public class CoffeeController {
 		mav.setViewName("master");
 		return mav;
 	}	
+	
+	@RequestMapping(value="/updateBoard", method=RequestMethod.POST)
+	public ModelAndView updateBoard(@RequestBody HashMap<String, String> param) {
+ 		ModelAndView mav = new ModelAndView();
+		int insertYn = service.updateBoard(param);
+		mav.setViewName("master");
+		return mav;
+	}	
+	
+	@RequestMapping(value="/deleteBoard", method=RequestMethod.POST)
+	public ModelAndView deleteBoard(@RequestBody HashMap<String, String> param) {
+ 		ModelAndView mav = new ModelAndView();
+		int insertYn = service.deleteBoard(param);
+		mav.setViewName("master");
+		return mav;
+	}	
 }

@@ -140,8 +140,18 @@
 				     WHERE USER_GROUP_ID || NAME = #{userGroupId}#{name}
     </insert>    
     
+    <update id="updateBoard" parameterType="hashMap">
+    	UPDATE INFO_NOTICE_BOARD
+    	   SET CONTENTS  = #{contents},
+    	       WORK_USER = #{workUser},
+    	       WORK_DATE = SYSDATE
+    	 WHERE MENU_GROUP_ID || BOARD_NUM = #{menuGroupId}#{boardNum}
+    </update>
     
-    
+    <delete id="deleteBoard" parameterType="hashMap">
+    	DELETE INFO_NOTICE_BOARD
+    	 WHERE MENU_GROUP_ID || BOARD_NUM = #{menuGroupId}#{boardNum}
+    </delete>
     
     
     
