@@ -76,8 +76,6 @@
 					<div class="table-responsive">
 
 						
-						<script>
-						</script>
 					        <h2 class="vh_hide">날씨정보</h2>
 					        <p class="weather-date"></p>
 					        <ul>
