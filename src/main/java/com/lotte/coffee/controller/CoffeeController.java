@@ -136,4 +136,12 @@ public class CoffeeController {
 		mav.setViewName("quiz");
 		return mav;
 	}
+	
+	@RequestMapping(value="/insertBoard", method=RequestMethod.POST)
+	public ModelAndView insertBoard(@RequestBody HashMap<String, String> param) {
+ 		ModelAndView mav = new ModelAndView();
+		int insertYn = service.insertBoard(param);
+		mav.setViewName("master");
+		return mav;
+	}	
 }

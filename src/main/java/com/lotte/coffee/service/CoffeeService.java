@@ -17,4 +17,5 @@ public interface CoffeeService {
 	List<Map<String, String>> selectSales();
 	List<QuizDTO> selectQuiz();
 	List<NoticeBoardDTO> selectBoard(String menuGroupId);
+	int insertBoard(HashMap<String, String> param);
 }

@@ -21,4 +21,5 @@ public interface CoffeeMapper {
 	List<Map<String, String>> selectSales2();
 	List<QuizDTO> selectQuiz();
 	List<NoticeBoardDTO> selectBoard(String menuGroupId);
+	int insertBoard(HashMap<String, String> param);
 }

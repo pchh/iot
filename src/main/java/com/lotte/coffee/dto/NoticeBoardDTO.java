@@ -7,28 +7,9 @@ public class NoticeBoardDTO {
 	private String Menu_Group_ID; // 장기,단기
 	private String Name;          // 이름
 	private String Work_Date;     // 등록일자
-	private String Hand_Phone;    // 전화번호
-	private String Resigt_ID;     // 생년월일
+	private String Login_PW;    // 전화번호
+	private String Login_ID;     // 생년월일
 	private String User_Group_ID; // 기수
-		
-	public String getHand_Phone() {
-		return Hand_Phone;
-	}
-	public void setHand_Phone(String hand_Phone) {
-		Hand_Phone = hand_Phone;
-	}
-	public String getResigt_ID() {
-		return Resigt_ID;
-	}
-	public void setResigt_ID(String resigt_ID) {
-		Resigt_ID = resigt_ID;
-	}
-	public String getUser_Group_ID() {
-		return User_Group_ID;
-	}
-	public void setUser_Group_ID(String user_Group_ID) {
-		User_Group_ID = user_Group_ID;
-	}		
 	public int getNum() {
 		return Num;
 	}
@@ -65,5 +46,24 @@ public class NoticeBoardDTO {
 	public void setWork_Date(String work_Date) {
 		Work_Date = work_Date;
 	}
+	public String getLogin_PW() {
+		return Login_PW;
+	}
+	public void setLogin_PW(String login_PW) {
+		Login_PW = login_PW;
+	}
+	public String getLogin_ID() {
+		return Login_ID;
+	}
+	public void setLogin_ID(String login_ID) {
+		Login_ID = login_ID;
+	}
+	public String getUser_Group_ID() {
+		return User_Group_ID;
+	}
+	public void setUser_Group_ID(String user_Group_ID) {
+		User_Group_ID = user_Group_ID;
+	}
 	
+		
 }

@@ -115,6 +115,34 @@
 	          INFO_HUMAN TB 
 	    WHERE TA.MENU_GROUP_ID=#{menuGroupId} 
 	      AND TA.REGIST_USER=TB.HUMAN_ID
-
     </select>
+    
+    <insert id="insertBoard" parameterType="hashMap">
+    	INSERT INTO INFO_NOTICE_BOARD(
+    						TITLE ,
+    						CONTENTS ,
+    						REGIST_DATE ,
+						    REGIST_USER ,
+						    WORK_USER ,
+						    WORK_DATE ,
+						    MENU_GROUP_ID ,
+						    BOARD_NUM 
+						     ) 
+				    SELECT #{title} ,
+				           #{contents} ,
+				           SYSDATE ,
+				           HUMAN_ID ,
+				           HUMAN_ID ,
+				           SYSDATE ,
+				           #{menuGroupId} ,
+				           SQ_BOARD.NEXTVAL
+				      FROM INFO_HUMAN
+				     WHERE USER_GROUP_ID || NAME = #{userGroupId}#{name}
+    </insert>    
+    
+    
+    
+    
+    
+    
 </mapper>
