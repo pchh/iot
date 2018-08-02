@@ -67,6 +67,8 @@ public class CoffeeController {
 		mav.setViewName("hello");
 		return mav;
 	}
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/checkMemId", method=RequestMethod.POST)
 	public int checkMemId(@RequestBody String mem_id) {
@@ -117,6 +119,14 @@ public class CoffeeController {
 		mav.setViewName("board");
 		return mav;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/boardWrite", method=RequestMethod.GET)
+	public ModelAndView boardWrite() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("boardWrite");
+		return mav;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/quiz", method=RequestMethod.GET)
 	public ModelAndView quiz() {

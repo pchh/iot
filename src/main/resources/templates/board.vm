@@ -243,6 +243,7 @@
               </tbody>
             </table>
           </div>
+          <a href="/boardWrite" class="btn btn-default">작성하기</a>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
