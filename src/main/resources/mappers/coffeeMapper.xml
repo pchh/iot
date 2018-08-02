@@ -118,6 +118,8 @@
     </select>
     
     <insert id="insertBoard" parameterType="hashMap">
+    	<![CDATA[ 
+    	
     	INSERT INTO INFO_NOTICE_BOARD(
     						TITLE ,
     						CONTENTS ,
@@ -138,6 +140,7 @@
 				           SQ_BOARD.NEXTVAL
 				      FROM INFO_HUMAN
 				     WHERE USER_GROUP_ID || NAME = #{userGroupId}#{name}
+		]]> 
     </insert>    
     
     <update id="updateBoard" parameterType="hashMap">

@@ -234,44 +234,114 @@
   <div class="content-wrapper">
     <div class="container-fluid">
         <div class="table-responsive">
+        <form action="">
            <table class="table table-bordered">
 
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" name="name" class="form-control" value="<%=product.name%>" /></td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
                     <td>
-                        <input type="file" name="thumbnail" />
-                        <%if(product.thumbnail){%>
-                            <a href= "/uploads/<%=product.thumbnail%>" target="_blank">업로드 이미지 보기</a>
-                        <%}%>
+                    	<input type="text" name="title" class="form-control" id="title" value="" required />
                     </td>
                 </tr>
+<!--                 <tr>
+                    <th>작성자</th>
+                    <td>
+                        <input type="text" name="name" class="form-control" value=""/>
+                         
+                        #foreach($item in $noticeBoardDTOList)
+                       	 $!{item.name}
+                       	#end
+                    </td>
+                </tr> -->
                 <tr>
                     <th>작성일자</th>
-                    <td><input type="text" name="price" class="form-control" value="<%=product.price%>"/></td>
+                    <td>
+                    	<script>
+	                    	var today = new Date();
+	                    	var dd = today.getDate();
+	                    	var mm = today.getMonth()+1; //January is 0!
+	                    	var yyyy = today.getFullYear();
+	
+	                    	if(dd<10) {
+	                    	    dd='0'+dd
+	                    	} 
+	
+	                    	if(mm<10) {
+	                    	    mm='0'+mm
+	                    	} 
+	
+	                    	today = yyyy+'년'+mm+'월'+dd+'일';
+	                    	document.write(today);
+                    	</script>
+                    </td>
                 </tr>
                 <tr>
                 
                 <th>내용</th>
                     <td>
-                        <textarea name="description" class="form-control" id="summernote"><%-product.description%></textarea>
-                        <script>
-					      $('#summernote').summernote({
-					        placeholder: 'Hello stand alone ui',
-					        tabsize: 2,
-					        height: 100
-					      });
-					    </script>
+                        <textarea name="contents" class="summernote" id="contents" required></textarea>
+
                     </td>
                 </tr>
 
             </table>
+            </form>
             
-           <a href="/board/001" class="btn btn-default">작성하기</a>
+           <a id="btn-insert" class="btn btn-primary">작성하기</a>
           </div>
+          <script>
+          
+					      jQuery('.summernote').summernote({
+					        placeholder: 'Hello stand alone ui',
+					        tabsize: 2,
+					        height: 100
+					      });
+					      /* jQuery( function() {
+					    	    jQuery( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+							}); */
+					      
+					      jQuery("#btn-insert").on("click", function(event) {
+					    		
+					  		var title=jQuery("#title").val();
+					  		var contents=jQuery("#contents").val();
+					  		contents = contents.replace(/(<([^>]+)>)/gi,''); //HTML 태그 모두 공백으로 대체 */
+					  		var name=jQuery("#name").val();
+					  		
+					  		
+					  		if(title ==""){
+					  			alert("제목을 입력하세요");
+					  			return;
+					  		}
+					  		if(contents == ""){
+					  			alert("내용을 입력하세요");
+					  			return;
+					  		}
+					  		
+					  		
+					  		
+					  		var data = {title: title, contents: contents, name: "원혜린", menuGroupId: "001", userGroupId: "86기"};
+					  		
+					  		
+					  		jQuery.ajax({ 
+					  			type:"POST",
+					  			url: '/insertBoard',
+					  			contentType:'application/json',
+					  			data: JSON.stringify(data),
+					  			success : function(resData) {
+					  				window.location.href = '/board'
+					  				
+					  			}, 
+					  			error : function(xhr, status, e) {
+					  				
+					  				//window.location.href = '/boardWrite'
+					  				console.log(e);
+					  				//alert("입력실패했습니다.");
+					  				
+					  			} 
+					  		});
+					  		
+					    	})
+					    </script>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
