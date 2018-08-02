@@ -118,8 +118,6 @@
     </select>
     
     <insert id="insertBoard" parameterType="hashMap">
-    	<![CDATA[ 
-    	
     	INSERT INTO INFO_NOTICE_BOARD(
     						TITLE ,
     						CONTENTS ,
@@ -130,17 +128,16 @@
 						    MENU_GROUP_ID ,
 						    BOARD_NUM 
 						     ) 
-				    SELECT #{title} ,
-				           #{contents} ,
-				           SYSDATE ,
-				           HUMAN_ID ,
-				           HUMAN_ID ,
-				           SYSDATE ,
-				           #{menuGroupId} ,
-				           SQ_BOARD.NEXTVAL
-				      FROM INFO_HUMAN
-				     WHERE USER_GROUP_ID || NAME = #{userGroupId}#{name}
-		]]> 
+   				      VALUES(
+							#{title} ,
+				            #{contents} ,
+				            SYSDATE ,
+							'00000001' ,
+				            '00000001' ,
+				            SYSDATE ,
+				            #{menuGroupId} ,
+				            SQ_BOARD.NEXTVAL
+						) 
     </insert>    
     
     <update id="updateBoard" parameterType="hashMap">

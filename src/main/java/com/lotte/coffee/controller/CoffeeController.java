@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,8 +58,9 @@ public class CoffeeController {
 	}
 	@RequestMapping(value="/logintest", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> loginTest(@RequestBody HashMap<String, String> param) {
+	public Map<String, String> loginTest(HttpSession session ,@RequestBody HashMap<String, String> param) {
 		Map<String, String> member = service.selectMember(param);
+		session.setAttribute("user", member);
 		return member;
 	}
 	@RequestMapping(value="/insertMember", method=RequestMethod.POST)
@@ -98,8 +101,10 @@ public class CoffeeController {
 	}
 	
 	@RequestMapping(value="/shortManage", method=RequestMethod.GET)
-	public ModelAndView shortManage() {
+	public ModelAndView shortManage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		HashMap<String, String> param = (HashMap<String, String>) session.getAttribute("user");
+		
 		mav.setViewName("shortManage");
 		return mav;
 	}
