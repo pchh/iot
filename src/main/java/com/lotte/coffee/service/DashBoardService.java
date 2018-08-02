@@ -179,12 +179,11 @@ public class DashBoardService {
 	
 	private void executeRule(Object obj) throws Exception {
 		if(obj instanceof JSONObject) {
-			long temperature = (long) Float.parseFloat(((JSONObject) obj).get("temperature").toString());
-			long humidity = (long) Float.parseFloat(((JSONObject) obj).get("humidity").toString());
-			long dust = (long) Float.parseFloat(((JSONObject) obj).get("dust").toString());
+			long temperature = (long) Float.parseFloat(((JSONObject) obj).get("soil").toString());
+			System.out.println(temperature);
 			//이전에 전달받은 값과 비교해서 반복적으로 똑같은 메시지를 보내지 않음.
 			//하나의 센서 값 당 최대 3번까지 보냄.
-            if(beforeTemperature != temperature && temperatureCount < 4) {
+            /*if(beforeTemperature != temperature && temperatureCount < 4) {
             	//
             	if(this.operator(temperature, ruleTemperatureOperator, Long.parseLong(ruleTemperatureValue))) {
     				//메시지를 한번만 보냄.
@@ -200,8 +199,8 @@ public class DashBoardService {
     			}
             	beforeTemperature = temperature;
             	temperatureCount++;
-            }
-            if(beforeHumidity != humidity && humidityCount < 4) {
+            }*/
+            /*if(beforeHumidity != humidity && humidityCount < 4) {
             	if(this.operator(humidity, ruleHumidityOperator, Long.parseLong(ruleHumidityValue))) {
          		   if(slackEnable) {
         			   this.sendSlackMessageAPI(ruleHumidityMessage);
@@ -230,7 +229,7 @@ public class DashBoardService {
     			}
             	beforeDust = dust;
             	dustCount++;
-            }
+            }*/
 	   }else {
 			if(obj.equals("1")) {
 				   if(slackEnable) {

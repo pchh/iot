@@ -39,14 +39,10 @@ public class DashBoardController {
 		String content = dashboardService.subscriptionParser(body);
 		if (content.equals("delete")) {
 		} else {
-			JSONObject result = new JSONObject();
-			result.put("type", type);
-			result.put("data", content);
-			content = result.toString();
 			HttpEntity<String> entity = new HttpEntity<String>(content, headers);
 			this.template.convertAndSend("/topic/subscribe", entity);
 		}
-
+		
 	}
 
 
