@@ -133,6 +133,13 @@ public class CoffeeController {
 		mav.setViewName("boardWrite");
 		return mav;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/boardDetail", method=RequestMethod.GET)
+	public ModelAndView boardDetail() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("boardDetail");
+		return mav;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/quiz", method=RequestMethod.GET)
