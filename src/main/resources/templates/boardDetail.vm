@@ -10,6 +10,16 @@
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
   <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- include summernote css/js -->
+  <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/lang/summernote-ko-KR.min.js"></script>
+   -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
   <!-- Custom fonts for this template-->
   <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
@@ -21,7 +31,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="javascript:history.back();">Start Bootstrap</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -223,27 +233,112 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성일자</th>
-                </tr>
-              </thead>
-              <tbody>
-	              #foreach($item in $noticeBoardDTOList)
-	                <tr>
-	              		<td class="boardTitle"><a href="boardDetail">$item.title</a></td>
-	                    <td>$item.User_Group_ID $item.name</td>
-	                    <td>$item.Work_Date</td>
-	                </tr>
-	              #end
-              </tbody>
-            </table>
-          </div>
-          <a href="/boardWrite" class="btn btn-default">작성하기</a>
+       <div class="col-sm-10">
+    
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <%=product.name%>
+            </div>
+            <div class="panel-body">
+                <div style="padding-bottom: 10px">
+                    작성일 : 
+                    <%=product.getDate.year%>년 
+                    <%=product.getDate.month%>월 
+                    <%=product.getDate.day%>일 
+                </div>
+                <%if(product.thumbnail){%>
+                    <p>
+                    <img src ='/uploads/<%=product.thumbnail%>' style="max-width: 100%" />
+                    </p>
+                <%}%>
+                <%-product.description%>
+
+                <!-- 댓글영역  -->
+                <hr />
+                <div id="comment_area">
+                <% comments.forEach( function(comment){ %>
+                    <div><%#이 태그가 remove된다.%>
+                        <%=comment.content%>
+                        [<a class='comment_delete' comment_id='<%=comment.id%>'>삭제</a>]
+                    </div>
+                <% }); %>
+                </div>
+
+            
+            <div>
+                <br><b>댓글작성하기</b>
+                <form id="commentForm" action="" method="post">
+                    <input type="hidden" name="product_id" value="<%=product.id%>" />
+                    <textarea class="form-control" name="content"></textarea>
+                    <button class="btn btn-primary" style="margin-top: 10px">댓글작성</button>
+                </form>
+            </div>
+            </div>
+        
+        
+        </div>
+
+        <!-- 댓글영역  -->
+
+
+        <a href="/admin/products" class="btn btn-default">목록으로</a>
+        <a href="/admin/products/edit/<%=product.id%>" class="btn btn-primary">수정</a>
+
+        <!--ajax client부분-->
+        <script>
+            $(document).ready(function(){
+            $('#commentForm').submit(function(){
+                    var $contentVal = $(this).children('textarea[name=content]').val();
+                    //alert($contentVal);
+                    
+                    if($contentVal){
+                        $.ajax({
+                            url: '/admin/products/ajax_comment/insert',
+                            type: 'POST',
+                            data: $(this).serialize(),//serialize: 각 데이터들을 mapping을 해주는 함수
+                        })
+                        .done(function(args){
+                            if(args.message==="success"){
+                                $('#comment_area').append(
+                                    //댓글추가시 삭제버튼도 같이 생기도록
+                                    '<div>'+args.content+
+                                    "[<a class='comment_delete' comment_id='"+ args.id+"'>삭제</a>] </div>"
+                                );
+                                $('#commentForm textarea[name=content]').val("");
+                            }
+                            //console.log(args.message);//message 하나만 출력
+                        })
+                        .fail(function(args){
+                            console.log(args);
+                        });
+                    }else{
+                        alert("댓글 내용을 입력해주세요.");
+                    }
+                    return false;
+            });
+            });
+            
+            $(document).on('click','.comment_delete',function(){
+                if(confirm('삭제하시겠습니까?')){//확인창에 눌렀을 시만 진행
+                    var $self = $(this); //여기서 this는 해당 댓글의 <a>태그를 뜻함
+                    $.ajax({
+                        url: '/admin/products/ajax_comment/delete',
+                        type: 'POST',
+                        data: {comment_id : $self.attr('comment_id')},//변수의 attribute로 접근
+                    })
+                    .done(function(){
+                        $self.parent().remove();//<a>태그의 parent니까 <div>
+                        alert("삭제가 완료되었습니다.");
+                    })
+                    .fail(function(args){
+                        console.log(args);
+                    });
+                }
+            });
+
+        </script>
+    </div>    
+        
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -289,17 +384,6 @@
     <script src="/resources/js/sb-admin-datatables.min.js"></script>
   </div>
 	<script type="text/javascript">
-	
-		/* 게시글 제목 클릭 상세보기 */ 
-		$('.boardTitle').on('click',function(){
-			var popUrl = "/boardDetail";	
-		//팝업창에 출력될 페이지 
-		URL var popOption = "width=570, height=360, resizable=no, scrollbars=no, status=no;"; 
-		//팝업창 옵션(optoin) 
-		window.open(popUrl,"",popOption); 
-		
-		});
-		
 	</script>
 </body>
 
