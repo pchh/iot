@@ -10,9 +10,11 @@ public class NoticeBoardDTO {
 	private String Login_PW;    // 전화번호
 	private String Login_ID;     // 생년월일
 	private String User_Group_ID; // 기수
+
 	public int getNum() {
 		return Num;
 	}
+
 	public void setNum(int num) {
 		Num = num;
 	}

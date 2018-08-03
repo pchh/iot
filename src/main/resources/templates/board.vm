@@ -138,6 +138,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+               	<th>번호</th>
                   <th>제목</th>
                   <th>작성자</th>
                   <th>작성일자</th>
@@ -146,9 +147,12 @@
               <tbody>
 	              #foreach($item in $noticeBoardDTOList)
 	                <tr>
-	              		<td class="boardTitle"><a href="boardDetail">$item.title</a></td>
+	                	<td>$item.Num</td>
+	                	
+	                	<td class="boardTitle"><a href="/boardDetail/${item.Num}">$item.title</a></td>
 	                    <td>$item.User_Group_ID $item.name</td>
 	                    <td>$item.Work_Date</td>
+	                    
 	                </tr>
 	              #end
               </tbody>
@@ -199,19 +203,7 @@
     <!-- Custom scripts for this page-->
     <script src="/resources/js/sb-admin-datatables.min.js"></script>
   </div>
-	<script type="text/javascript">
 	
-		/* 게시글 제목 클릭 상세보기 */ 
-		$('.boardTitle').on('click',function(){
-			var popUrl = "/boardDetail";	
-		//팝업창에 출력될 페이지 
-		URL var popOption = "width=570, height=360, resizable=no, scrollbars=no, status=no;"; 
-		//팝업창 옵션(optoin) 
-		window.open(popUrl,"",popOption); 
-		
-		});
-		
-	</script>
 </body>
 
 </html>

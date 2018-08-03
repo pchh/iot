@@ -110,11 +110,25 @@
 	    SELECT TA.TITLE ,
 	    	   TA.WORK_DATE ,
 	    	   TB.NAME ,
-	    	   TB.USER_GROUP_ID
+	    	   TB.USER_GROUP_ID,
+	    	   TA.BOARD_NUM as Num
 	     FROM INFO_NOTICE_BOARD TA ,
 	          INFO_HUMAN TB 
 	    WHERE TA.MENU_GROUP_ID=#{menuGroupId} 
 	      AND TA.REGIST_USER=TB.HUMAN_ID
+    </select>
+    
+        
+     <select id="selectBoardDetail"  resultType="com.lotte.coffee.dto.NoticeBoardDTO">
+	    SELECT TA.BOARD_NUM as Num,
+						       TB.NAME,
+						       TA.REGIST_DATE,
+						       TA.TITLE,
+						       TA.CONTENTS
+ 		FROM INFO_NOTICE_BOARD TA,
+      			INFO_HUMAN TB
+		WHERE TA.REGIST_USER = TB.HUMAN_ID
+		  AND TA.BOARD_NUM = #{Num}
     </select>
     
     <insert id="insertBoard" parameterType="hashMap">

@@ -52,6 +52,11 @@ public class CoffeeServiceImpl implements CoffeeService {
 		return mapper.selectBoard(menuGroupId);
 	}
 	@Override
+	public List<NoticeBoardDTO> selectBoardDetail(String Num) {
+		return mapper.selectBoardDetail(Num);
+	}
+	
+	@Override
 	public int insertBoard(HashMap<String, String> param) {
 		return mapper.insertBoard(param);
 	}

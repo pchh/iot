@@ -1,4 +1,4 @@
-package com.lotte.coffee.controller;
+ package com.lotte.coffee.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -134,9 +134,11 @@ public class CoffeeController {
 		return mav;
 	}
 	@ResponseBody
-	@RequestMapping(value = "/boardDetail", method=RequestMethod.GET)
-	public ModelAndView boardDetail() {
+	@RequestMapping(value = "/boardDetail/{Num}", method=RequestMethod.GET)
+	public ModelAndView boardDetail(HttpSession session , @PathVariable("Num") String Num) {
 		ModelAndView mav = new ModelAndView();
+		List<NoticeBoardDTO> boardList = service.selectBoardDetail(Num);
+		mav.addObject(boardList);
 		mav.setViewName("boardDetail");
 		return mav;
 	}
