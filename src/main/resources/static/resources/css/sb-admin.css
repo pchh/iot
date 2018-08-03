@@ -64,7 +64,7 @@ body.fixed-nav {
 .z-1 {
   z-index: 1;
 }
-/* 음악스트리밍 관련 css */
+/* �쓬�븙�뒪�듃由щ컢 愿��젴 css */
 /* 
 #seconds {
 	font-size:10px;
@@ -574,7 +574,7 @@ footer.sticky-footer {
 
 @media (min-width: 992px) {
   footer.sticky-footer {
-    width: calc(100% - 250px);
+    width: calc(100%);
   }
 }
 
