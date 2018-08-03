@@ -151,6 +151,16 @@ public class CoffeeController {
 		return mav;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/quizMain", method=RequestMethod.GET)
+	public ModelAndView quizMain() {
+		ModelAndView mav = new ModelAndView();
+		List<QuizDTO> quizList = service.selectQuiz();
+		mav.addObject(quizList);
+		mav.setViewName("quizMain");
+		return mav;
+	}
+	
 	@RequestMapping(value="/insertBoard", method=RequestMethod.POST)
 	public ModelAndView insertBoard(@RequestBody HashMap<String, String> param) {
  		ModelAndView mav = new ModelAndView();

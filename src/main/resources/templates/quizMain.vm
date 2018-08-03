@@ -140,8 +140,8 @@
           <button id="btn_bt">퀴즈퀴즈</button>
         </li>
       </ol>
-   <!--    
-<script language="javascript">  
+      
+ <script language="javascript">  
 	var delay=15; //시간설정
 	var correctAnswers=new Array("a","b","a","b","b");  //정답
 	
@@ -157,9 +157,7 @@
 			document.all.timeLeft.innerHTML=clock;
 			hide_question();
 		} else {
-			document.all.timeLeft.innerHTML=0;
-			document.all.quizScore.innerHTML="당신은 "+(q_num-1)+"문제중 "+score+"개를 맞췄습니다.";
-			document.all.quizScore.style.display="inline";
+			display(q_num, score)
 		}
 	}
 
@@ -189,47 +187,123 @@
 		clearTimeout(timer);
 		timer=setTimeout("hide_question()",500);
 	} 
+	 
+	function display(q_num, score){
+		document.all.timeLeft.innerHTML=0;
+		/* document.all.quizScore.innerHTML="당신은 "+(q_num-1)+"문제중 "+score+"개를 맞췄습니다."; */
+		if(score >= 4){
+			document.all.quizScore.innerHTML="축하합니다! <br><br> 쿠폰 : LORE Garden!";
+		}
+		else{
+			document.all.quizScore.innerHTML="죄송합니다. 나중에 다시 도전해주세요."
+		}
+		document.all.quizScore.style.display="inline";
+		/* document.all.answerBoard.innerHTML="쿠폰 : LORE Garden!"; */
+	}
+	window.onload=show_question
+</script>
 
-	window.onload=show_question;
-	</script> -->
-
+<br>
 <div id="answerBoard"> </div>
+<br>
 
-<!-- <div class="paper mt-3"> -->
-<img src="/resources/img/label.png" alt="OX퀴즈" class="tag"/>
-                     <div class="row">
-                         <div class="col-md-8 mt-5 small-area col-md-offset-2">
-            <ul class="quiz-notice">
-                <li>1)<strong>총 5문제가 출제됩니다.</strong></li>
-                <li>2)각 문제당 <strong>15초의 제한시간</strong>이 있습니다.</li>
-                <li>3)<strong>4 문제 이상 정답시 쿠폰이 발급</strong>됩니다. 문제를 풀기 전 신중하게 답변을 선택해주세요~!</li>
-            </ul>
+<div id="question1" style="display:none">
+	<b>1. 괴테의 철학이 담은 첫 소설이며 롯데라는 회사의 토대가 된 소설은 '젊은 베르터의 고뇌'이다.</b><br>
+	<div class="col-md-8 mt-5 small-area col-md-offset-2">
+	<div class="row center select-ox mt-2 mb-4">
+        <div class="col-xs-6 ta-c">
+            <p>
+               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png"  onclick="check_answer('a')" alt="O"/></a>
+            </p>
+        </div>
+        <div class="col-xs-6 ta-c">
+            <p>
+    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png"  onclick="check_answer('b')" alt="X"/></a>
+            </p>
+        </div>
+     </div>
+    </div>
+</div>
+
+<div id="question2" style="display:none">
+	<b>2. Challenge을 통해 달성한 성공 사례는 수르길 프로젝트와 모짜렐라 인더 버거인다.</b><br>
+	<div class="col-md-8 mt-5 small-area col-md-offset-2">
+	<div class="row center select-ox mt-2 mb-4">
+        <div class="col-xs-6 ta-c">
+            <p>
+               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
+            </p>
+        </div>
+        <div class="col-xs-6 ta-c">
+            <p>
+    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
+            </p>
         </div>
     </div>
-<!-- </div> -->
+    </div>
+</div>
 
- <div class="paper-vline ta-c">
-     <div class="col-md-offset-1 col-md-10 col-sm-offset-2 col-sm-8 col-xs-offset-2 col-xs-8 mt-4 pb-3 center">
-         <a href="/quizMain"><img src="/resources/img/btn_start.png" alt="OX퀴즈 도전하기"/></a>
-     </div>
- </div>
-      
+<div id="question3" style="display:none">
+<b>3. BCE을 통해 달성한 성공 사례는 순하리와 말랑카우이다.</b><br>
+	<div class="col-md-8 mt-5 small-area col-md-offset-2">
+	<div class="row center select-ox mt-2 mb-4">
+        <div class="col-xs-6 ta-c">
+            <p>
+               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
+            </p>
+        </div>
+        <div class="col-xs-6 ta-c">
+            <p>
+    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
+            </p>
+        </div>
+    </div>
+    </div>
+</div>
 
-      
-      
- <!-- 제한시간 : <B><span id="timeLeft"></span></B> 초<br> -->
-      
-      
-      
-<!--       
-      #foreach($item in $quizDTOList)
-      	<label>${item.Contents}</label>
-	    <ul>
-		    <input type="radio" name=${item.ID} value="Apple" checked>O
-		    <input type="radio" name=${item.ID} value="Grape">X
-	    </ul>
-      #end -->
-      
+<div id="question4" style="display:none">
+<b>4. 대한민국에 창립한 첫 회사는 롯데알미늄이다.</b><br>
+	<div class="col-md-8 mt-5 small-area col-md-offset-2">
+	<div class="row center select-ox mt-2 mb-4">
+        <div class="col-xs-6 ta-c">
+            <p>
+               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
+            </p>
+        </div>
+        <div class="col-xs-6 ta-c">
+            <p>
+    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
+            </p>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div id="question5" style="display:none">
+<b>5. 롯데정보통신 설립일은 1996년 12월 26일이다.</b><br>
+	<div class="col-md-8 mt-5 small-area col-md-offset-2">
+	<div class="row center select-ox mt-2 mb-4">
+        <div class="col-xs-6 ta-c">
+            <p>
+               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
+            </p>
+        </div>
+        <div class="col-xs-6 ta-c">
+            <p>
+    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
+            </p>
+        </div>
+    </div>
+    </div>
+</div>      
+
+<div id="quizScore" style="display:none">
+</div>
+
+<br><br>      
+ 제한시간 : <B><span id="timeLeft" ></span></B> 초<br>
+ 
+ 
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
