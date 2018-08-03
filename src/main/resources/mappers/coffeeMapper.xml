@@ -153,6 +153,9 @@
     	 WHERE MENU_GROUP_ID || BOARD_NUM = #{menuGroupId}#{boardNum}
     </delete>
     
-    
-    
+     <select id="selectTrace"  resultType="com.lotte.coffee.dto.HumanDTO">
+	    SELECT DISTINCT USER_GROUP_ID
+	      FROM INFO_HUMAN
+    </select>
+      
 </mapper>

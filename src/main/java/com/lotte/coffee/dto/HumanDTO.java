@@ -7,7 +7,15 @@ public class HumanDTO {
 	private String Hand_Phone;    // 전화번호
 	private String Resigt_ID;     // 생년월일
 	private String User_Group_ID; // 기수
+	private String Company;       // 계열사
 	
+	
+	public String getCompany() {
+		return Company;
+	}
+	public void setCompany(String company) {
+		Company = company;
+	}
 	public String getName() {
 		return Name;
 	}

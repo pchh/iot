@@ -137,175 +137,108 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <button id="btn_bt">퀴즈퀴즈</button>
+          <button id="btn_85">85기</button>
+        </li>
+        <li class="breadcrumb-item">
+          <button id="btn_86">86기</button>
+        </li>
+        <li class="breadcrumb-item">
+          <button id="btn_87">87기</button>
         </li>
       </ol>
-      
- <script language="javascript">  
-	var delay=15; //시간설정
-	var correctAnswers=new Array("a","b","a","b","b");  //정답
-	
-	var q_num=1;
-	var timer;
-	var layer;
-	var clock=delay;
-	var score=0;
-	
-	function show_question(){
-		if (layer=eval("document.all.question"+q_num)){
-			layer.style.display="inline";
-			document.all.timeLeft.innerHTML=clock;
-			hide_question();
-		} else {
-			display(q_num, score)
-		}
-	}
-
-	function hide_question(){
-		if (clock>0) {
-			document.all.timeLeft.innerHTML=clock;
-			clock--;
-			timer=setTimeout("hide_question()",1000);
-		} else {
-			clearTimeout(timer);
-			document.all.answerBoard.innerHTML=" ";
-			clock=delay;
-			layer.style.display="none";
-			q_num++;
-			show_question();
-		}
-	}
-
-	 function check_answer(answer){
-		if (correctAnswers[q_num-1]==answer){
-			score++;
-			document.all.answerBoard.innerHTML="<font color=blue><b>정답입니다.</b></font>";
-		} else {
-			document.all.answerBoard.innerHTML="<font color=red><b>땡! 틀렸습니다.</b></font>";
-		}
-		clock=0;
-		clearTimeout(timer);
-		timer=setTimeout("hide_question()",500);
-	} 
-	 
-	function display(q_num, score){
-		document.all.timeLeft.innerHTML=0;
-		/* document.all.quizScore.innerHTML="당신은 "+(q_num-1)+"문제중 "+score+"개를 맞췄습니다."; */
-		if(score >= 4){
-			document.all.quizScore.innerHTML="축하합니다! <br><br> 쿠폰 : LIFE Garden!";
-		}
-		else{
-			document.all.quizScore.innerHTML="죄송합니다. 나중에 다시 도전해주세요."
-		}
-		document.all.quizScore.style.display="inline";
-		/* document.all.answerBoard.innerHTML="쿠폰 : LORE Garden!"; */
-	}
-	window.onload=show_question
-</script>
-
-<br>
-<div id="answerBoard"> </div>
-<br>
-
-<div id="question1" style="display:none">
-	<b>1. 괴테의 철학이 담은 첫 소설이며 롯데라는 회사의 토대가 된 소설은 '젊은 베르터의 고뇌'이다.</b><br>
-	<div class="col-md-8 mt-5 small-area col-md-offset-2">
-	<div class="row center select-ox mt-2 mb-4">
-        <div class="col-xs-6 ta-c">
-            <p>
-               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png"  onclick="check_answer('a')" alt="O"/></a>
-            </p>
-        </div>
-        <div class="col-xs-6 ta-c">
-            <p>
-    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png"  onclick="check_answer('b')" alt="X"/></a>
-            </p>
-        </div>
-     </div>
-    </div>
-</div>
-
-<div id="question2" style="display:none">
-	<b>2. Challenge을 통해 달성한 성공 사례는 수르길 프로젝트와 모짜렐라 인더 버거인다.</b><br>
-	<div class="col-md-8 mt-5 small-area col-md-offset-2">
-	<div class="row center select-ox mt-2 mb-4">
-        <div class="col-xs-6 ta-c">
-            <p>
-               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
-            </p>
-        </div>
-        <div class="col-xs-6 ta-c">
-            <p>
-    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
-            </p>
-        </div>
-    </div>
-    </div>
-</div>
-
-<div id="question3" style="display:none">
-<b>3. BCE을 통해 달성한 성공 사례는 순하리와 말랑카우이다.</b><br>
-	<div class="col-md-8 mt-5 small-area col-md-offset-2">
-	<div class="row center select-ox mt-2 mb-4">
-        <div class="col-xs-6 ta-c">
-            <p>
-               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
-            </p>
-        </div>
-        <div class="col-xs-6 ta-c">
-            <p>
-    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
-            </p>
-        </div>
-    </div>
-    </div>
-</div>
-
-<div id="question4" style="display:none">
-<b>4. 대한민국에 창립한 첫 회사는 롯데알미늄이다.</b><br>
-	<div class="col-md-8 mt-5 small-area col-md-offset-2">
-	<div class="row center select-ox mt-2 mb-4">
-        <div class="col-xs-6 ta-c">
-            <p>
-               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
-            </p>
-        </div>
-        <div class="col-xs-6 ta-c">
-            <p>
-    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
-            </p>
-        </div>
-    </div>
-    </div>
-</div>
-
-<div id="question5" style="display:none">
-<b>5. 롯데정보통신 설립일은 1996년 12월 26일이다.</b><br>
-	<div class="col-md-8 mt-5 small-area col-md-offset-2">
-	<div class="row center select-ox mt-2 mb-4">
-        <div class="col-xs-6 ta-c">
-            <p>
-               	<a href="javascript:check_quiz('O');" class="btn-answer"><img src="/resources/img/O.png" onclick="check_answer('a')" alt="O"/></a>
-            </p>
-        </div>
-        <div class="col-xs-6 ta-c">
-            <p>
-    			<a href="javascript:check_quiz('X');" class="btn-answer"><img src="/resources/img/X.png" onclick="check_answer('b')" alt="X"/></a>
-            </p>
-        </div>
-    </div>
-    </div>
-</div>      
-
-<div id="quizScore" style="display:none">
-</div>
-
-<br><br>      
- 제한시간 : <B><span id="timeLeft" ></span></B> 초<br>
- 
- 
-    </div>
-    <!-- /.container-fluid-->
+      	<div id="85" style="display:none">
+	      <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>계열사</th>
+                  <th>기수</th>
+                  <th>이름</th>
+                </tr>
+              </thead>
+              <tbody>
+	                <tr>
+	              		<td class="boardTitle">롯데정보통신</td>
+	                    <td>85기</td>
+	                    <td>강민수</td>
+	                </tr>
+              </tbody>
+            </table>
+          </div>
+      	</div>
+      	<div id="86" style="display:none">
+			<div class="table-responsive">
+			<div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>계열사</th>
+                  <th>기수</th>
+                  <th>이름</th>
+                </tr>
+              </thead>
+              <tbody>
+              <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>
+	                <tr>
+	              		<td class="boardTitle">롯데정보통신</td>
+	                    <td>86기</td>
+	                    <td>박지환</td>
+	               </tr>
+	               <tr>
+	                    <td class="boardTitle2">롯데정보통신</td>
+	                    <td>86기</td>
+	                    <td>박철홍</td>
+	               </tr>
+	               <tr>
+	                    <td class="boardTitle3">현대정보기술</td>
+	                    <td>86기</td>
+	                    <td>김선민</td>
+	               </tr>
+	               <tr>
+	                    <td class="boardTitle5">롯데정보통신</td>
+	                    <td>86기</td>
+	                    <td>김영화</td>
+	               </tr>
+	               <tr>
+	                    <td class="boardTitle6">롯데정보통신</td>
+	                    <td>86기</td>
+	                    <td>조수진</td>
+	               </tr>
+	               <tr>
+	                    <td class="boardTitle7">롯데정보통신</td>
+	                    <td>86기</td>
+	                    <td>원혜린</td>
+	               </tr>
+              </tbody>
+            </table>	
+            <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 1 of 1 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+          </div>
+          </div>
+      	</div>
+     <div id="87"  style="display:none">
+	      <div class="table-responsive">
+	      <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>계열사</th>
+                  <th>기수</th>
+                  <th>이름</th>
+                </tr>
+              </thead>
+              <tbody>
+              <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>
+	                 <tr>
+	                    <td class="boardTitle">롯데정보통신</td>
+	                    <td>87기</td>
+	                    <td>양민혁</td>
+	               </tr>
+              </tbody>
+            </table>
+			<div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 1 of 1 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>          </div>
+          </div>
+      	</div> 	
+  	<!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
@@ -349,15 +282,22 @@
     <script src="/resources/js/sb-admin-datatables.min.js"></script>
   </div>
 	<script type="text/javascript">
-	jQuery("#btn_bt").on("click", function(event) {
-  		jQuery("#gosu").css("display","none");
-  		jQuery("#bt").css("display","block");
-  	})
-	jQuery("#btn_gosu").on("click", function(event) {
-  		jQuery("#bt").css("display","none");
-  		jQuery("#gosu").css("display","block");
-  	})
-  </script>
+		jQuery("#btn_85").on("click", function(event) {
+	  		jQuery("#86").css("display","none");
+	  		jQuery("#87").css("display","none");
+	  		jQuery("#85").css("display","block");
+	  	})
+		jQuery("#btn_86").on("click", function(event) {
+	  		jQuery("#85").css("display","none");
+	  		jQuery("#87").css("display","none");
+	  		jQuery("#86").css("display","block");
+	  	})
+	  	jQuery("#btn_87").on("click", function(event) {
+	  		jQuery("#85").css("display","none");
+	  		jQuery("#86").css("display","none");
+	  		jQuery("#87").css("display","block");
+	  	})
+	</script>
 </body>
 
 </html>

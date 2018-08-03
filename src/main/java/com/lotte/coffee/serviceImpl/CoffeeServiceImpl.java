@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lotte.coffee.dto.CoffeeDTO;
+import com.lotte.coffee.dto.HumanDTO;
 import com.lotte.coffee.dto.NoticeBoardDTO;
 import com.lotte.coffee.dto.QuizDTO;
 import com.lotte.coffee.mapper.CoffeeMapper;
@@ -63,4 +64,9 @@ public class CoffeeServiceImpl implements CoffeeService {
 	public int deleteBoard(HashMap<String, String> param) {
 		return mapper.deleteBoard(param);
 	}
+	@Override
+	public List<HumanDTO> selectTrace() {
+		return mapper.selectTrace();
+	}
+	
 }

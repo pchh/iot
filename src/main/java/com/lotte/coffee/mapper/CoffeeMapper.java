@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lotte.coffee.dto.CoffeeDTO;
+import com.lotte.coffee.dto.HumanDTO;
 import com.lotte.coffee.dto.NoticeBoardDTO;
 import com.lotte.coffee.dto.QuizDTO;
 
@@ -24,4 +25,6 @@ public interface CoffeeMapper {
 	int insertBoard(HashMap<String, String> param);
 	int updateBoard(HashMap<String, String> param);
 	int deleteBoard(HashMap<String, String> param);
+	List<HumanDTO> selectTrace();
+	
 }
