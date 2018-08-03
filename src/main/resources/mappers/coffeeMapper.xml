@@ -131,10 +131,10 @@
    				      VALUES(
 							#{title} ,
 				            #{contents} ,
-				            SYSDATE ,
+				            SYSDATE + (9/24) ,
 							'00000001' ,
 				            '00000001' ,
-				            SYSDATE ,
+				            SYSDATE + (9/24) ,
 				            #{menuGroupId} ,
 				            SQ_BOARD.NEXTVAL
 						) 
