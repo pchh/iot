@@ -123,6 +123,7 @@
         <div class="card-header">
           <i class="fa fa-table"></i>수정합니다 혜린이가 리스트!!!min</div>
       		<div id="test">ttt</div>
+      		<button id="ttttt">전구켜기</button>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -477,8 +478,10 @@
 			stompClient.connect({}, function(frame) {
 				console.log('Connected: ' + frame);
 				stompClient.subscribe('/topic/subscribe', function(message) {
-					var type = (JSON.parse(JSON.parse(message.body).body)).type;
-					var data = (JSON.parse(JSON.parse(message.body).body)).data;
+				console.log("message : " + message);
+				var type = (JSON.parse(JSON.parse(message.body).body)).temp;
+				console.log("type : "+type);
+				var data = (JSON.parse(JSON.parse(message.body).body)).data;
 					if( type == 'sensor' ) 
 					{
 	 					temperature_value = JSON.parse(data).temperature;
@@ -498,18 +501,30 @@
 						$('.light').empty();
 				    	$('.light').append(lightPretty);
 					}
-					if( type == 'soil' ) {
-						light_value = data;
-						var test = JSON.parse(data).temperature;
+					//if( type == 'soil' ) {
+						//light_value = data;
+						//var test = JSON.parse(data).temperature;
 						$('#test').empty();
-				    	$('#test').append(test);
-					}
+				    	$('#test').append(type);
+					//}
 				});
 			}, function(error) {
 				console.log(error);
 				disconnect();
 			});
 		}
+		
+		
+	jQuery("#ttttt").on("click", function(event) {
+  		sendCommand("tste");
+  	})
+	function sendCommand(command){
+		var url = '/sendcommand';
+		var xhr = new XMLHttpRequest();
+		xhr.open('PUT', url);
+		xhr.setRequestHeader('Content-Type', 'text/plain');
+		xhr.send(command);
+	}
   </script>
 </body>
 

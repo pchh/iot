@@ -179,8 +179,8 @@ public class DashBoardService {
 	
 	private void executeRule(Object obj) throws Exception {
 		if(obj instanceof JSONObject) {
-			long temperature = (long) Float.parseFloat(((JSONObject) obj).get("soil").toString());
-			System.out.println(temperature);
+			//long temperature = (long) Float.parseFloat(((JSONObject) obj).get("soil").toString());
+			//System.out.println(temperature);
 			//이전에 전달받은 값과 비교해서 반복적으로 똑같은 메시지를 보내지 않음.
 			//하나의 센서 값 당 최대 3번까지 보냄.
             /*if(beforeTemperature != temperature && temperatureCount < 4) {
@@ -268,23 +268,33 @@ public class DashBoardService {
  * @throws IOException
  */
 	public void sendCommand(String cmd) throws ParseException, IOException {
-		String resourceUrl = iotPlatformUrl + "/"+ mgmtCmdPrefix + "-" + oid;
-		logger.debug("[sendCommand] to = {}, oid= {}, commandKey = {}, commandValue = {}", resourceUrl, oid, cmdName, cmd);
+		if("11111".equals(cmd)) {
+			String oid="";
+			String cmdName="";
+			cmd="";
+			String token="";
+		}
+		String resourceUrl = iotPlatformUrl + "/"+ mgmtCmdPrefix + "-0000000000000000_01077549133";
+		System.out.println(resourceUrl);
+		logger.debug("[sendCommand] to = {}, oid= {}, commandKey = {}, commandValue = {}", resourceUrl, cmdName, cmd);
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
+			String cmdName="switch";
+			cmd="ON";
+			
 			HttpPut httpPut = new HttpPut(resourceUrl);
-			httpPut.setHeader("X-M2M-RI", "RQI0001"); //
-			httpPut.setHeader("X-M2M-Origin", "/S" + oid); //
+			httpPut.setHeader("X-M2M-RI", "2626"); //
+			httpPut.setHeader("X-M2M-Origin", "/S0000000000000000_01077549133" ); //
 			httpPut.setHeader("Accept", "application/json");
-			httpPut.setHeader("Authorization", accessToken);
+			httpPut.setHeader("Authorization", "cbedf546-dd27-91b4-99ab-46fea6bb8d38");
 			httpPut.setHeader("Content-Type", "application/vnd.onem2m-res+json");
-			String body = "{ \"m2m:mgc\": {\"cmt\": 4,\"exra\": { \"any\":[{\"nm\" :\"" + cmdName + "\", \"val\" : \""
+			String body = "{ \"m2m:mgc\": {\"cmt\": 4,\"exra\": { \"any\":[{\"nm\" :\"" + cmdName +"\", \"val\" : \""
 					+ cmd + "\"} ]},\"exm\" : 1,\"exe\":true,\"pexinc\":false}}";
 			httpPut.setEntity(new StringEntity(body));
 
 			CloseableHttpResponse res = httpclient.execute(httpPut);
 
-			try {
+			/*try {
 				if (res.getStatusLine().getStatusCode() == 200) {
 					org.apache.http.HttpEntity entity = (org.apache.http.HttpEntity) res.getEntity();
 					logger.debug(EntityUtils.toString(entity));
@@ -293,9 +303,9 @@ public class DashBoardService {
 				}
 			} finally {
 				res.close();
-			}
+			}*/
 		} finally {
-			httpclient.close();
+			//httpclient.close();
 		}
 
 	}

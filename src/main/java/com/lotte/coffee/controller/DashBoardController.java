@@ -47,7 +47,7 @@ public class DashBoardController {
 
 
 	
-	@RequestMapping(value = "/sendcommand", method = RequestMethod.POST)
+	@RequestMapping(value = "/sendcommand", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	public void sendToplug(@RequestBody String body, @RequestHeader HttpHeaders headers) throws Exception {
 		if (body.equals("ON")) {
