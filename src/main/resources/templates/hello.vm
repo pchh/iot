@@ -85,7 +85,7 @@
 					<div class="table-responsive">
 
 						
-					        <h2 class="vh_hide">현재 날씨정보</h2>
+					        <h2 class="vh_hide">현재 날씨정보 ${USER_GROUP_ID} ${HUMAN_ID} $session.getAttribute("user")</h2>
 					        <p class="weather-date"></p>
 					        <ul>
 					            <li class="weather-temp"></li>

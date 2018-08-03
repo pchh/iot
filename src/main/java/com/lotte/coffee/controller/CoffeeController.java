@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class CoffeeController {
 	
 	@ResponseBody
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public ModelAndView main(@RequestParam Map<String, String> param) {
+	public ModelAndView main(HttpServletRequest request, @RequestParam Map<String, String> param) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
 		List<CoffeeDTO> goodsList = service.selectGoods();
 		mav.setViewName("hello");
 		mav.addObject(goodsList);
@@ -103,7 +105,7 @@ public class CoffeeController {
 	@RequestMapping(value="/shortManage", method=RequestMethod.GET)
 	public ModelAndView shortManage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		HashMap<String, String> param = (HashMap<String, String>) session.getAttribute("user");
+		//HashMap<String, String> param = (HashMap<String, String>) session.getAttribute("user");
 		
 		mav.setViewName("shortManage");
 		return mav;
@@ -117,7 +119,7 @@ public class CoffeeController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/board/{menuGroupId}", method=RequestMethod.GET)
-	public ModelAndView board(@PathVariable("menuGroupId") String menuGroupId){
+	public ModelAndView board(HttpSession session , @PathVariable("menuGroupId") String menuGroupId){
 		ModelAndView mav = new ModelAndView();
 		List<NoticeBoardDTO> boardList = service.selectBoard(menuGroupId);
 		mav.addObject(boardList);

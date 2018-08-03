@@ -241,7 +241,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small>LOTTE 86</small>
         </div>
       </div>
     </footer>
@@ -285,8 +285,8 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="/webjars/sockjs-client/1.0.2/sockjs.js"></script>
-  <script src="/webjars/stomp-websocket/2.3.3/stomp.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
   <script type="text/javascript">
   	var ctx = document.getElementById("myAreaChart");
 	var myLineChart = new Chart(ctx, {
@@ -468,7 +468,9 @@
 		
   	})
   	
-  	
+  		$(document).ready(function() {
+		connect();
+		});
   	function connect() {
 			var socket = new SockJS('/realtime');
 			stompClient = Stomp.over(socket);
