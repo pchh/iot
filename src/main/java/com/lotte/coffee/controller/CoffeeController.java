@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotte.coffee.dto.CoffeeDTO;
@@ -187,7 +188,19 @@ public class CoffeeController {
 		mav.setViewName("master");
 		return mav;
 	}
+	@ResponseBody
 	
+	@RequestMapping(value="resources/img", method=RequestMethod.POST)
+	    public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
+	        try {
+	            UploadFile uploadedFile = imageService.store(file);
+	            return ResponseEntity.ok().body("/image/" + uploadedFile.getId());
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return ResponseEntity.badRequest().build();
+	        }
+	    }
+
 	@ResponseBody
 	@RequestMapping(value="/trace", method=RequestMethod.GET)
 	public ModelAndView trace(HttpSession session , @RequestParam Map<String, String> param){
