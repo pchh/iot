@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotte.coffee.dto.CoffeeDTO;
+import com.lotte.coffee.dto.HumanDTO;
 import com.lotte.coffee.dto.NoticeBoardDTO;
 import com.lotte.coffee.dto.QuizDTO;
 import com.lotte.coffee.service.CoffeeService;
@@ -185,5 +186,16 @@ public class CoffeeController {
 		int insertYn = service.deleteBoard(param);
 		mav.setViewName("master");
 		return mav;
-	}	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/trace", method=RequestMethod.GET)
+	public ModelAndView trace(HttpSession session , @RequestParam Map<String, String> param){
+		ModelAndView mav = new ModelAndView();
+		List<HumanDTO> boardList = service.selectTrace();
+		mav.addObject(boardList);
+		mav.setViewName("trace");
+		return mav;
+	}
+	
 }
