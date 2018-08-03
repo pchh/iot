@@ -360,7 +360,7 @@
 														});
 									});
 					//이미지 업로드 부분
-					<script type="text/javascript">
+					
 					    $(document).ready(function() {
 					      $('#summernote').summernote({
 					        height: 300,
@@ -382,7 +382,6 @@
 					      form_data.append('file', file);
 					      $.ajax({
 					        data: form_data,
-					        type: "POST",
 					        url: '/resources/img',
 					        cache: false,
 					        contentType: false,
