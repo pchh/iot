@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -188,18 +189,14 @@ public class CoffeeController {
 		mav.setViewName("master");
 		return mav;
 	}
-	@ResponseBody
-	
-	@RequestMapping(value="resources/img", method=RequestMethod.POST)
-	    public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
-	        try {
-	            UploadFile uploadedFile = imageService.store(file);
-	            return ResponseEntity.ok().body("/image/" + uploadedFile.getId());
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return ResponseEntity.badRequest().build();
-	        }
-	    }
+//	//이미지 업로드
+//	@ResponseBody
+//	@RequestMapping(value="/resources/img", method=RequestMethod.POST)
+//    public ModelAndView imgUpload(@RequestBody HashMap<String, String> param) {
+//		ModelAndView mav = new ModelAndView();
+//		int insertYn = service.imgUpload(param);
+//    }
+//	
 
 	@ResponseBody
 	@RequestMapping(value="/trace", method=RequestMethod.GET)

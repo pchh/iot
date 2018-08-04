@@ -243,7 +243,7 @@
                     	<input type="text" name="title" class="form-control" id="title" value="" required />
                     </td>
                 </tr>
-<!--                 <tr>
+          		<!-- <tr>
                     <th>작성자</th>
                     <td>
                         <input type="text" name="name" class="form-control" value=""/>
@@ -252,7 +252,7 @@
                        	 $!{item.name}
                        	#end
                     </td>
-                </tr> -->
+                </tr>  -->
                 <tr>
                     <th>작성일자</th>
                     <td>
@@ -279,22 +279,38 @@
                 
                 <th>내용</th>
                     <td>
-                        <textarea name="contents" class="summernote" id="contents" required></textarea>
-
+                        <!-- <textarea name="contents" class="summernote" id="contents" required></textarea> -->
+                        <div id="summernote" class="summernote"></div>
+					    <script>
+					      $('#summernote').summernote({
+					        placeholder: 'Hello bootstrap 4',
+					        tabsize: 2,
+					        height: 100
+					      });
+					    </script>
                     </td>
                 </tr>
 
             </table>
             </form>
             
-           <a id="btn-insert" class="btn btn-primary">작성하기</a>
+           <a id="btn-insert" class="btn btn-primary">저장하기</a>
           </div>
           <script>
-          
 					      jQuery('.summernote').summernote({
 					        placeholder: 'Hello stand alone ui',
 					        tabsize: 2,
-					        height: 100
+					        height: 300,
+					        minHeight: null,
+					        maxHeight: null,
+					        focus: true,
+					         callbacks: {
+					          onImageUpload: function(files, editor, welEditable) {
+					            for (var i = files.length - 1; i >= 0; i--) {
+					              sendFile(files[i], this);
+					            }
+					          }
+					        } 
 					      });
 					      /* jQuery( function() {
 					    	    jQuery( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
@@ -318,7 +334,6 @@
 					  		}
 					  		
 					  		
-					  		
 					  		var data = {title: title, contents: contents, name: "원혜린", menuGroupId: "001", userGroupId: "86기"};
 					  		
 					  		
@@ -339,6 +354,62 @@
 					  		});
 					  		
 					    	})
+					    	
+					    	//이미지 업로드 부분
+					
+					   /*  jQuery(document).ready(function() {
+					    	jQuery('#summernote').summernote({
+					        
+					      });
+					    }); */
+					    
+					    function sendFile(file, el) {
+					      var form_data = new FormData();
+					      form_data.append('file', file);
+					      $.ajax({
+					        data: form_data,
+					        url: '/resources/img',
+					        cache: false,
+					        contentType: false,
+					        enctype: 'multipart/form-data',
+					        processData: false,
+					        success: function(url) {
+					          $(el).summernote('editor.insertImage', url);
+					          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
+					        }
+					      });
+					    }
+					    
+					    public UploadFile store(MultipartFile file) throws Exception {
+					        try {
+					            if (file.isEmpty()) {
+					                throw new Exception("Failed to store empty file " + file.getOriginalFilename());
+					            }
+					            
+					            String saveFileName = UploadFileUtils.fileSave(rootLocation.toString(), file);
+					            
+					            if (saveFileName.toCharArray()[0] == '/') {
+					                saveFileName = saveFileName.substring(1);
+					            }
+					            
+					            Resource resource = loadAsResource(saveFileName);
+					            
+					            UploadFile saveFile = new UploadFile();
+					            saveFile.setSaveFileName(saveFileName);
+					            saveFile.setFileName(file.getOriginalFilename());
+					            saveFile.setContentType(file.getContentType());
+					            saveFile.setFilePath(rootLocation.toString() + File.separator + saveFileName);
+					            saveFile.setSize(resource.contentLength());
+					            saveFile.setRegDate(new Date());
+					            saveFile = fileRepository.save(saveFile);
+					            
+					            return saveFile;
+					        } catch (IOException e) {
+					            throw new Exception("Failed to store file " + file.getOriginalFilename(), e);
+					        }
+					    }
+
+
 					    </script>
     </div>
     <!-- /.container-fluid-->
