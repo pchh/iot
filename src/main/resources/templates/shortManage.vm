@@ -95,6 +95,7 @@
   </nav>
   <div>
     <div class="container-fluid">
+    <!--  민혁 수정 -->
       <!-- Breadcrumbs-->
       <!-- <ol class="breadcrumb"> -->
         <!-- <li class="breadcrumb-item"> -->
@@ -103,7 +104,7 @@
         <!-- <li class="breadcrumb-item active">My Dashboard</li> -->
       <!-- </ol> -->
       <!-- Icon Cards-->
-      <div class="row">
+     <!--  <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
@@ -168,7 +169,20 @@
             </a>
           </div>
         </div>
+      </div> -->
+      
+       <!-- Icon Cards-->
+      <div class="row">
+         <img class="card-footer text-white clearfix small z-5" src="/resources/img/방명록.png" width="15%" height="15% href="/trace">
+         <img class="card-footer text-white clearfix small z-1" src="/resources/img/게시판.png" width="15%" height="15% href="/board">
+         <img class="card-footer text-white clearfix small z-1" src="/resources/img/팁.png" width="15%" height="15% href="/info">
+         <img class="card-footer text-white clearfix small z-1" src="/resources/img/퀴즈.png" width="15%" height="15% href="/quiz">
+       
       </div>
+      
+      
+      
+      
       
       <!-- Area Chart Example-->
     </div>
