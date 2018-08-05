@@ -189,14 +189,7 @@ public class CoffeeController {
 		mav.setViewName("master");
 		return mav;
 	}
-//	//이미지 업로드
-//	@ResponseBody
-//	@RequestMapping(value="/resources/img", method=RequestMethod.POST)
-//    public ModelAndView imgUpload(@RequestBody HashMap<String, String> param) {
-//		ModelAndView mav = new ModelAndView();
-//		int insertYn = service.imgUpload(param);
-//    }
-//	
+
 
 	@ResponseBody
 	@RequestMapping(value="/trace", method=RequestMethod.GET)
