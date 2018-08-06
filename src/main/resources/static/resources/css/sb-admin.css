@@ -97,6 +97,21 @@ body.fixed-nav {
 -image  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#0b0b0b',GradientType=0 ); /* IE6-9 */
 }
  
+#btn_85{
+	background-color: #E9ECEF;
+	border: 0;
+	outline: 0;
+}
+#btn_86{
+	background-color: #E9ECEF;
+	border: 0;
+	outline: 0;
+}
+#btn_87{
+	background-color: #E9ECEF;
+	border: 0;
+	outline: 0;
+}
 /* .container {
     -webkit-transition: all .7s ease;
     -moz-transition: all .7s ease;
@@ -268,11 +283,18 @@ body {
 
 #description {
 	font-size: 2rem;
+	
 }
 
 #temperature {
-	font-size: 7rem;
+	font-size: 5.5rem;
+	color: F5C703;
+	font-family: FontAwesome;
+	
 }
+/* @font-face { font-family: 'lotte''; src: url(/resources/img/12롯데마트드Light.ttf) format('truetype'); }
+ 
+
 
 #icon-thermometer {
 	font-size: 5rem;
