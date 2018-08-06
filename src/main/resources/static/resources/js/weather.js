@@ -45,9 +45,9 @@
 	 
 	    today = year+""+month+""+day;
 	    /* 좌표 */
-	    //금천구 가산동 기준
-	    var _nx = 58, 
-	    _ny = 125,
+	    //위치: 오산 연수원 기준
+	    var _nx = 61, 
+	    _ny = 118,
 	    apikey = "6Pt91UWttrq6am20E3F5PLobj1fnoc0rGaui%2FIhwAi5A2u7l2Jck9qU8giLCG7aDmCeFrw5PwSPloKeOcbuUyg%3D%3D",
 	    //http://newsky2.kma.go.kr/service/SecndSrtpdFrcstInfoService2/ForecastGrib?serviceKey=6Pt91UWttrq6am20E3F5PLobj1fnoc0rGaui%2FIhwAi5A2u7l2Jck9qU8giLCG7aDmCeFrw5PwSPloKeOcbuUyg%3D%3D&base_date=20180801&base_time=0600&nx=60&ny=127&numOfRows=10&pageSize=10&pageNo=1&startPage=1&_type=xml
 	    //초단기 예보 url //동네예보는 ForecastSpaceData

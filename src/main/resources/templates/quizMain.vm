@@ -192,7 +192,7 @@
 		document.all.timeLeft.innerHTML=0;
 		/* document.all.quizScore.innerHTML="당신은 "+(q_num-1)+"문제중 "+score+"개를 맞췄습니다."; */
 		if(score >= 4){
-			document.all.quizScore.innerHTML="축하합니다! <br><br> 쿠폰 : LORE Garden!";
+			document.all.quizScore.innerHTML="축하합니다! <br><br> 쿠폰 : LIFE Garden!";
 		}
 		else{
 			document.all.quizScore.innerHTML="죄송합니다. 나중에 다시 도전해주세요."
