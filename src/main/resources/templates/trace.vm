@@ -136,18 +136,13 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">
+       
           <!-- <button id="btn_85">85기</button> -->
           <button id="btn_85"><img src="/resources/img/85.png" width="50%" height="50%"></button>
-
+		<button id="btn_86"><img src="/resources/img/86.png" width="50%" height="50%"></button>
+		<button id="btn_87"><img src="/resources/img/87.png" width="50%" height="50%"></button>
           <!-- <img src="/resources/img/85.png" width="35%" height="35%"> -->
-        </li>
-        <li class="breadcrumb-item">
-           <button id="btn_86"><img src="/resources/img/86.png" width="50%" height="50%"></button>
-        </li>
-        <li class="breadcrumb-item">
-          <button id="btn_87"><img src="/resources/img/87.png" width="50%" height="50%"></button>
-        </li>
+     
       </ol>
       	<div id="85" style="display:none">
 	      <div class="table-responsive">
