@@ -124,7 +124,9 @@
 						       TB.NAME,
 						       TA.REGIST_DATE,
 						       TA.TITLE,
-						       TA.CONTENTS
+						       TA.CONTENTS,
+						       TB.USER_GROUP_ID,
+						       TA.REGIST_DATE AS WORK_DATE
  		FROM INFO_NOTICE_BOARD TA,
       			INFO_HUMAN TB
 		WHERE TA.REGIST_USER = TB.HUMAN_ID
