@@ -80,25 +80,32 @@
 
 			<!-- Icon Cards-->
 			<!--  DashBoard Example-->
-			<div class="card mb-3">
-				<div class="card-header">
+			<div class="card mb-3" >
+				<!-- <div class="card-header">
 					<i class="fa fa-table"></i>현재 날씨정보 ${USER_GROUP_ID} ${HUMAN_ID} $session.getAttribute("user")
-				</div>
+				</div> -->
 				<div class="card-body">
-					<div class="table-responsive">
-
-						
-					        <h2 class="vh_hide">현재 날씨정보 ${USER_GROUP_ID} ${HUMAN_ID} $session.getAttribute("user")</h2>
-					        <p class="weather-date"></p>
+					<div class="table-responsive" >
+							
+					        <h2 class="vh_hide" id="weather">현재 금천구 가산동 날씨정보</h2>
+					        
+					      	<!-- <img src="/resources/img/O.png"> -->
+						    <img src="https://image.flaticon.com/icons/svg/439/439842.svg"  width ="30%" height="30%" align="right">
+						    <p class="weather-date"></p>
+						    <div id="temperature" class="col-6 text-center">
+							    <p class="weather-temp" id="temp"></p>
+							    <i id="icon-thermometer" class="wi wi-thermometer"></i>
+						    </div>
 					        <ul>
+					        	
 					            <li class="weather-temp"></li>
-					            <li id="RN1"> </li>
+					            <li> <h1 id="RN1"> </h1></li>
 					            <li id="REH"> </li>
 					            <li class="weather-state-text"></li>
 					        </ul>
 					 		
 						
-
+							
 					</div>
 
 
@@ -106,9 +113,15 @@
 			</div>
 			<!-- Area Button Example-->
 			<div>
-				<a id="btn-join" class="btn btn-primary btn-lg">장기</a>
-				 <a href="/shortManage" id="btn-join" class="btn btn-primary btn-lg">단기</a>
-
+			
+			
+				 <!-- <input type="text" class="form-text"> -->
+			      <center>
+			      <input type="image" src="/resources/img/게시판.png" width="35%" height="35%" onclick="location.href='/board/001'">
+			      <input type="image" src="/resources/img/발자취.png" width="35%" height="3%%" onclick="location.href='/trace'" >
+			      <input type="image" src="/resources/img/퀴즈.png" width="35%" height="35%" onclick="location.href='/quiz'">
+			      <input type="image" src="/resources/img/팁.png" width="35%" height="35%" onclick="location.href='/info'">
+			      </center>
 			</div>
 			<!-- Area MUSIC Example-->
 			<div class="card mb-3">
