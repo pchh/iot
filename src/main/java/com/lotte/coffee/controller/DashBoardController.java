@@ -50,12 +50,7 @@ public class DashBoardController {
 	@RequestMapping(value = "/sendcommand", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	public void sendToplug(@RequestBody String body, @RequestHeader HttpHeaders headers) throws Exception {
-		if (body.equals("ON")) {
-			dashboardService.sendCommand(body);
-		} else {
-			dashboardService.sendCommand(body);
-		}
-
+		dashboardService.sendCommand(body);
 	}
 	
 	//페이지 로딩 시 데이터를 가져옴.

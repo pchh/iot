@@ -269,26 +269,43 @@ public class DashBoardService {
  * @throws ParseException
  * @throws IOException
  */
-	public void sendCommand(String cmd) throws ParseException, IOException {
-		if("11111".equals(cmd)) {
-			String oid="";
-			String cmdName="";
-			cmd="";
-			String token="";
+	public void sendCommand(String command) throws ParseException, IOException {
+		String token="";
+		String oid="";
+		String cmdName="";
+		String cmd="";
+		if("onTest".equals(command)) {
+			oid="0000000000000000_01077549133";
+			cmdName="switch";
+			cmd="ON";
+			token="cbedf546-dd27-91b4-99ab-46fea6bb8d38";
+		}else if ("offTest".equals(command)) {
+			oid="0000000000000000_01077549133";
+			cmdName="switch";
+			cmd="OFF";
+			token="cbedf546-dd27-91b4-99ab-46fea6bb8d38";
+		}else if ("waterOn".equals(command)) {
+			oid="0000000000000000_01098992198";
+			cmdName="switch";
+			cmd="ON";
+			token="32da6711-bde9-c0c9-7697-7c8fb992eff8";
+		}else if("waterOff".equals(command)) {
+			oid="0000000000000000_01098992198";
+			cmdName="switch";
+			cmd="OFF";
+			token="32da6711-bde9-c0c9-7697-7c8fb992eff8";
 		}
-		String resourceUrl = iotPlatformUrl + "/"+ mgmtCmdPrefix + "-0000000000000000_01077549133";
+		String resourceUrl = iotPlatformUrl + "/"+ mgmtCmdPrefix + "-"+oid;
 		System.out.println(resourceUrl);
 		logger.debug("[sendCommand] to = {}, oid= {}, commandKey = {}, commandValue = {}", resourceUrl, cmdName, cmd);
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
-			String cmdName="switch";
-			cmd="ON";
 			
 			HttpPut httpPut = new HttpPut(resourceUrl);
 			httpPut.setHeader("X-M2M-RI", "2626"); //
-			httpPut.setHeader("X-M2M-Origin", "/S0000000000000000_01077549133" ); //
+			httpPut.setHeader("X-M2M-Origin", "/S"+oid ); //
 			httpPut.setHeader("Accept", "application/json");
-			httpPut.setHeader("Authorization", "cbedf546-dd27-91b4-99ab-46fea6bb8d38");
+			httpPut.setHeader("Authorization", token);
 			httpPut.setHeader("Content-Type", "application/vnd.onem2m-res+json");
 			String body = "{ \"m2m:mgc\": {\"cmt\": 4,\"exra\": { \"any\":[{\"nm\" :\"" + cmdName +"\", \"val\" : \""
 					+ cmd + "\"} ]},\"exm\" : 1,\"exe\":true,\"pexinc\":false}}";

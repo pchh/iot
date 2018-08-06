@@ -38,6 +38,7 @@ public class CoffeeController {
 		List<CoffeeDTO> goodsList = service.selectGoods();
 		mav.setViewName("hello");
 		mav.addObject(goodsList);
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.addAllObjects(param);
 		return mav;
 	}
@@ -108,15 +109,15 @@ public class CoffeeController {
 	@RequestMapping(value="/shortManage", method=RequestMethod.GET)
 	public ModelAndView shortManage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		//HashMap<String, String> param = (HashMap<String, String>) session.getAttribute("user");
-		
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.setViewName("shortManage");
 		return mav;
 	}
 	
 	@RequestMapping(value="/info", method=RequestMethod.GET)
-	public ModelAndView info() {
+	public ModelAndView info(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.setViewName("info");
 		return mav;
 	}
@@ -127,13 +128,15 @@ public class CoffeeController {
 		List<NoticeBoardDTO> boardList = service.selectBoard(menuGroupId);
 		mav.addObject(boardList);
 		mav.setViewName("board");
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		return mav;
 	}
 	@ResponseBody
 	@RequestMapping(value = "/boardWrite", method=RequestMethod.GET)
-	public ModelAndView boardWrite() {
+	public ModelAndView boardWrite(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("boardWrite");
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		return mav;
 	}
 	@ResponseBody
@@ -143,33 +146,37 @@ public class CoffeeController {
 		List<NoticeBoardDTO> boardList = service.selectBoardDetail(Num);
 		mav.addObject(boardList);
 		mav.setViewName("boardDetail");
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		return mav;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/quiz", method=RequestMethod.GET)
-	public ModelAndView quiz() {
+	public ModelAndView quiz(HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
 		List<QuizDTO> quizList = service.selectQuiz();
 		mav.addObject(quizList);
 		mav.setViewName("quiz");
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		return mav;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/quizMain", method=RequestMethod.GET)
-	public ModelAndView quizMain() {
+	public ModelAndView quizMain(HttpSession session ) {
 		ModelAndView mav = new ModelAndView();
 		List<QuizDTO> quizList = service.selectQuiz();
 		mav.addObject(quizList);
 		mav.setViewName("quizMain");
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		return mav;
 	}
 	
 	@RequestMapping(value="/insertBoard", method=RequestMethod.POST)
-	public ModelAndView insertBoard(@RequestBody HashMap<String, String> param) {
+	public ModelAndView insertBoard(HttpSession session ,@RequestBody HashMap<String, String> param) {
  		ModelAndView mav = new ModelAndView();
 		int insertYn = service.insertBoard(param);
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.setViewName("insertBoard");
 		return mav;
 		//response.setContentType("text/html;charset=utf-8");
@@ -204,17 +211,19 @@ public class CoffeeController {
 	
 	
 	@RequestMapping(value="/updateBoard", method=RequestMethod.POST)
-	public ModelAndView updateBoard(@RequestBody HashMap<String, String> param) {
+	public ModelAndView updateBoard(HttpSession session ,@RequestBody HashMap<String, String> param) {
  		ModelAndView mav = new ModelAndView();
 		int insertYn = service.updateBoard(param);
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.setViewName("master");
 		return mav;
 	}	
 	
 	@RequestMapping(value="/deleteBoard", method=RequestMethod.POST)
-	public ModelAndView deleteBoard(@RequestBody HashMap<String, String> param) {
+	public ModelAndView deleteBoard(HttpSession session ,@RequestBody HashMap<String, String> param) {
  		ModelAndView mav = new ModelAndView();
 		int insertYn = service.deleteBoard(param);
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.setViewName("master");
 		return mav;
 	}
@@ -225,6 +234,7 @@ public class CoffeeController {
 		ModelAndView mav = new ModelAndView();
 		List<HumanDTO> boardList = service.selectTrace();
 		mav.addObject(boardList);
+		mav.addAllObjects((HashMap<String, String>) session.getAttribute("user"));
 		mav.setViewName("trace");
 		return mav;
 	}

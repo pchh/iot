@@ -124,6 +124,9 @@
           <i class="fa fa-table"></i>수정합니다 혜린이가 리스트!!!min</div>
       		<div id="test">ttt</div>
       		<button id="ttttt">전구켜기</button>
+      		<button id="offf">전구끄기</button>
+      		<button id="waterOn">물주기</button>
+      		<button id="waterOff">물끄기</button>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -479,7 +482,23 @@
 				console.log('Connected: ' + frame);
 				stompClient.subscribe('/topic/subscribe', function(message) {
 				console.log("message : " + message);
-				var type = (JSON.parse(JSON.parse(message.body).body)).temp;
+				var temp = (JSON.parse(JSON.parse(message.body).body)).temp;
+				if( temp != ''){
+					$('#test').html(temp);
+				}
+				var dustDensity = (JSON.parse(JSON.parse(message.body).body)).dustDensity;
+				if( dustDensity != ''){
+					$('#test').html(dustDensity);
+				}
+				var hum = (JSON.parse(JSON.parse(message.body).body)).hum;
+				if( hum != ''){
+					$('#test').html(hum);
+				}
+				var soil = (JSON.parse(JSON.parse(message.body).body)).soil;
+				if( soil != ''){
+					$('#test').html(soil);
+				}
+				var human = (JSON.parse(JSON.parse(message.body).body)).human;
 				console.log("type : "+type);
 				var data = (JSON.parse(JSON.parse(message.body).body)).data;
 					if( type == 'sensor' ) 
@@ -516,7 +535,17 @@
 		
 		
 	jQuery("#ttttt").on("click", function(event) {
-  		sendCommand("tste");
+  		sendCommand("onTest");
+  	})
+  	jQuery("#offf").on("click", function(event) {
+  		sendCommand("offTest");
+  		$('#test').html("ttttttttttt");
+  	})
+  		jQuery("#waterOn").on("click", function(event) {
+  		sendCommand("waterOn");
+  	})
+  	jQuery("#waterOff").on("click", function(event) {
+  		sendCommand("waterOff");
   	})
 	function sendCommand(command){
 		var url = '/sendcommand';
