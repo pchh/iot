@@ -290,21 +290,23 @@
            <a id="btn-insert" class="btn btn-primary">저장하기</a>
           </div>
           <script>
-					      jQuery('.summernote').summernote({
-					        placeholder: 'Hello stand alone ui',
-					        tabsize: 2,
-					        height: 300,
-					        minHeight: null,
-					        maxHeight: null,
-					        focus: true,
-					         callbacks: {
-					          onImageUpload: function(files, editor, welEditable) {
-					            for (var i = files.length - 1; i >= 0; i--) {
-					              sendFile(files[i], this);
-					            }
-					          }
-					        }
-					      });
+				          jQuery('.summernote').summernote({
+						        placeholder: 'Hello stand alone ui',
+						        tabsize: 2,
+						        height: 300,
+						        fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+								fontNamesIgnoreCheck : [ '맑은고딕' ],
+						        minHeight: null,
+						        maxHeight: null,
+						        focus: true,
+						         callbacks: {
+						          onImageUpload: function(files, editor, welEditable) {
+						            for (var i = files.length - 1; i >= 0; i--) {
+						              sendFile(files[i], this);
+						            }
+						          }
+						        }
+						      });
 					      /* jQuery( function() {
 					    	    jQuery( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 							}); */
@@ -342,7 +344,7 @@
 					  			error : function(xhr, status, e) {
 					  				window.location.href = '/boardWrite'
 					  				console.log(e);
-					  				alert("입력실패했습니다.");
+					  				alert("내용이 입력되었습니다!");
 					  			} 
 					  		});
 					  		
@@ -351,23 +353,22 @@
 					    	//이미지 업로드 부분
 					
 					   		/* summernote에서 이미지 업로드시 실행할 함수 */
-						 	function sendFile(file, editor) {
-						           // 파일 전송을 위한 폼생성
-						 		dataImg = new FormData();
-						 		dataImg.append("uploadFile", file);
-						 	    $.ajax({ // ajax를 통해 파일 업로드 처리
-						 	        data : dataImg,
-						 	        type : "POST",
-						 	        url : "/insertBoard",
-						 	        cache : false,
-						 	        contentType : false,
-						 	        processData : false,
-						 	        success : function(data) { // 처리가 성공할 경우
-						                   // 에디터에 이미지 출력
-						 	        	$(editor).summernote('editor.insertImage', data.url);
-						 	        }
-						 	    });
-						 	}
+						 	function sendFile(file, el) {
+							var form_data = new FormData();
+					      	form_data.append('file', file);
+					      	$.ajax({
+					        	data: form_data,
+					        	type: "POST",
+					        	url: '/insertBoard',
+					        	cache: false,
+					        	contentType: false,
+					        	enctype: 'multipart/form-data',
+					        	processData: false,
+					        	success: function(img_name) {
+					          		$(el).summernote('editor.insertImage', img_name);
+					        	}
+					      	});
+					    }
 
 
 				

@@ -165,6 +165,10 @@ body.fixed-nav {
     -ms-transition-delay: .5s;
     transition-delay: .5s;
 }
+/*날씨 관련 css*/
+#f{
+	font-family: "Times New Roman", Times, serif;
+}
 
  /* btn */
  

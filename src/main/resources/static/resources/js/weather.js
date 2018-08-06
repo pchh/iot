@@ -105,7 +105,7 @@
 	           if(rain_state != 0) {
 	               switch(rain_state) {
 	                   case 1:
-	                    	$('.weather-state-text').html("비");
+	                    	$('.weather-state-text').html("비 <img src="img/label.png">");
 	                       break;
 	                   case 2:
 	                       $('.weather-state-text').html("비/눈");
