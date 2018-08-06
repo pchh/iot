@@ -82,7 +82,7 @@
 			<!--  DashBoard Example-->
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fa fa-table"></i>DashBoard
+					<i class="fa fa-table"></i>현재 날씨정보 ${USER_GROUP_ID} ${HUMAN_ID} $session.getAttribute("user")
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
