@@ -172,17 +172,62 @@
       </div> -->
       
        <!-- Icon Cards-->
-      <div class="row">
+      
+      
+    <style>
+      input {
+        vertical-align: middle;
+      }
+      input.form-text {
+        border: 1px solid #bcbcbc;
+        height: 28px;
+      }
+      input.img_button1 {
+        background: url(/resources/img/방명록.png) no-repeat;
+        border: none;
+        width: 400px;
+        height: 450px;
+        cursor: pointer;
+      }
+      input.img_button2 {
+        background: url(/resources/img/게시판.png) no-repeat;
+        border: none;
+        width: 400px;
+        height: 450px;
+        cursor: pointer;
+      }
+      input.img_button3 {
+        background: url(/resources/img/팁.png) no-repeat;
+        border: none;
+        width: 400px;
+        height: 450px;
+        cursor: pointer;
+      }
+      input.img_button4 {
+        background: url(/resources/img/퀴즈.png) no-repeat;
+        border: none;
+        width: 400px;
+        height: 450px;
+        cursor: pointer;
+      }
+    </style>
+      
+      <!-- <input type="text" class="form-text"> -->
+      <input type="button" class="img_button1" onclick="location.href='/trace'" >
+      <input type="button" class="img_button2" onclick="location.href='/board/001'">
+      <p>
+      <input type="button" class="img_button3" onclick="location.href='/info'">
+      <input type="button" class="img_button4" onclick="location.href='/quiz'">
+      
+      <!-- <div class="row">
          <img class="card-footer text-white clearfix small z-5" src="/resources/img/방명록.png" width="15%" height="15% href="/trace">
          <img class="card-footer text-white clearfix small z-1" src="/resources/img/게시판.png" width="15%" height="15% href="/board">
          <img class="card-footer text-white clearfix small z-1" src="/resources/img/팁.png" width="15%" height="15% href="/info">
          <img class="card-footer text-white clearfix small z-1" src="/resources/img/퀴즈.png" width="15%" height="15% href="/quiz">
+         
+       <button img src="/resources/img/방명록.png" width="15%" height="15% href="/trace"> </button>
        
-      </div>
-      
-      
-      
-      
+      </div> -->
       
       <!-- Area Chart Example-->
     </div>

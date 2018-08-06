@@ -58,10 +58,10 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+				<!-- <li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="Dashboard"><a class="nav-link" href="/master"> <i
 						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">관리자페이지로</span>
-				</a></li>
+				</a></li> -->
 			</ul>
 			<ul class="navbar-nav sidenav-toggler">
 				<li class="nav-item"><a class="nav-link text-center"
@@ -195,7 +195,7 @@
 						<body>
 						<div id="wrapper">
 						  <h1>Music Player</h1>
-						  <audio preload autoplay="autoplay"></audio>
+						  <audio preload ></audio>
 						  <ol>
 							<li><a href="#" data-src="/resources/music/01.mp3">Track 01</a></li>
 							<li><a href="#" data-src="/resources/music/02.mp3">Track 02</a></li>
