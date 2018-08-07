@@ -62,12 +62,6 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <button id="btn_bt">퀴즈퀴즈</button>
-        </li>
-      </ol>
    <!--    
 <script language="javascript">  
 	var delay=15; //시간설정
@@ -213,7 +207,6 @@
   	})
   	
 	jQuery("#classs").on("click", function(event) {
-		alert("aaa");
 		jQuery.ajax({ 
 			type:"GET", 
 			url: '/logout',
@@ -223,6 +216,7 @@
 				window.location.href = '/main'
 			}, 
 			error : function(xhr, status, e) {
+				window.location.href = '/main'
 				console.log(e);
 			} 
 		});

@@ -110,6 +110,12 @@ public class DashBoardService {
 	@Value("${io.thingsofvalue.oid}")
 	String oid;
 	
+	@Value("${soil.standard}")
+	String soilStandard;
+	
+	@Value("${light.standard}")
+	String lightStandard;
+	
 	@Value("${io.thingsofvalue.oid.accessToken}")
 	String accessToken;
 	
@@ -135,6 +141,7 @@ public class DashBoardService {
 	 */
 	public String subscriptionParser(String body, String type) throws Exception {
 		logger.debug("[subscriptionParsing] body = {}", body);
+		System.out.println("body = "+body);
 		JSONParser jsonParser = new JSONParser();
 		jsonParser.parse(body);
 		JSONObject result = (JSONObject) jsonParser.parse(body);
@@ -151,17 +158,23 @@ public class DashBoardService {
 				if(type.equals("soil")) {
 					double soil = (double)contentJson.get("soil");
 					System.out.println(soil);
-					if( soil < 100 ) {
+					if( soil > Integer.parseInt(soilStandard) ) {
+						System.out.println("물주기 실행");
 						this.sendCommand("waterOn");
 					}else {
+						System.out.println("물끄기 실행");
 						this.sendCommand("waterOff");
 					}
 				}
 				if(type.equals("lightsensor")) {
 					double light = (double)contentJson.get("light");
 					//System.out.println(soil);
-					if( light < 100 ) {
-						//this.sendCommand(command);
+					if( light < Integer.parseInt(lightStandard) ) {
+						System.out.println("불 켜기");
+						this.sendCommand("lightOn");
+					}else {
+						System.out.println("불 끄기");
+						this.sendCommand("lightOff");
 					}
 				}
 				//this.executeRule(contentJson);
