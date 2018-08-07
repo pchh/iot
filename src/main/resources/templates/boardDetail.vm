@@ -164,15 +164,6 @@
 							<% }); %> -->
 						</div>
 
-							
-						<div>
-							<br> <b>댓글작성하기</b>
-							<form id="commentForm" action="" method="post">
-								<input type="hidden" name="product_id" value="<%=product.id%>" />
-								<textarea class="form-control" name="content"></textarea>
-								<button class="btn btn-primary" style="margin-top: 10px">댓글작성</button>
-							</form>
-						</div>
 					</div>
 
 

@@ -249,7 +249,6 @@
 										console.log("HUMAN IN");
 									}else{
 										audio.play();
-										audio.playPause();
 										console.log("HUMAN OUT");
 									}	
 									
@@ -269,6 +268,7 @@
 							<li><a href="#" data-src="/resources/music/01.mp3">Track 01</a></li>
 							<li><a href="#" data-src="/resources/music/02.mp3">Track 02</a></li>
 							<li><a href="#" data-src="/resources/music/03.mp3">Track 03</a></li>
+							<li><a href="#" data-src="/resources/music/04.mp3">Track 04</a></li>
 						  </ol>
 						<!-- </div> -->
 						<div id="shortcuts">
