@@ -95,7 +95,7 @@
 						    <p class="weather-date"></p>
 						    <div id="temperature" class="col-6 text-center">
 							    <b><p class="weather-temp"></p></b>
-							    <i id="icon-thermometer" class="wi wi-thermometer"></i>
+							   	<i id="icon-thermometer" class="wi wi-thermometer"></i>
 						    </div>
 					        <ul>
 					            <!-- <li class="weather-temp"></li> -->
@@ -103,7 +103,11 @@
 					            <li id="REH"> </li>
 					            <li class="weather-state-text"></li>
 					        </ul>
-				            <img src="/resources/img/smartfarm.png" width ="80%" height="80%">
+					        
+				            <img src="/resources/img/menubar2.png" width ="75%" height="75%">
+				            
+				             <img src="/resources/img/LIFE Garden.png" width ="40%" height="40%" align="right">
+				            <br> <br>
 				            <ul>
 					            <li id="temp"></li>
 					            <li id="hum"> </li>
