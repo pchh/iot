@@ -133,7 +133,7 @@ public class DashBoardService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String subscriptionParser(String body) throws Exception {
+	public String subscriptionParser(String body, String type) throws Exception {
 		logger.debug("[subscriptionParsing] body = {}", body);
 		JSONParser jsonParser = new JSONParser();
 		jsonParser.parse(body);
@@ -147,7 +147,24 @@ public class DashBoardService {
 			String con = (String) cin.get("con");
 			try {
 				JSONObject contentJson = JsonUtil.fromJson(con, JSONObject.class); //JSON 형식의 스트링이 아닌 경우도 JSON OBJECT로 변환 한다.
-				this.executeRule(contentJson);
+				System.out.println(JsonUtil.toJson(contentJson));
+				if(type.equals("soil")) {
+					double soil = (double)contentJson.get("soil");
+					System.out.println(soil);
+					if( soil < 100 ) {
+						this.sendCommand("waterOn");
+					}else {
+						this.sendCommand("waterOff");
+					}
+				}
+				if(type.equals("lightsensor")) {
+					double light = (double)contentJson.get("light");
+					//System.out.println(soil);
+					if( light < 100 ) {
+						//this.sendCommand(command);
+					}
+				}
+				//this.executeRule(contentJson);
 				return JsonUtil.toJson(contentJson);  
 			}catch (JsonSyntaxException e) {
 				this.executeRule(con);
@@ -274,12 +291,12 @@ public class DashBoardService {
 		String oid="";
 		String cmdName="";
 		String cmd="";
-		if("onTest".equals(command)) {
+		if("lightOn".equals(command)) {
 			oid="0000000000000000_01077549133";
 			cmdName="switch";
 			cmd="ON";
 			token="cbedf546-dd27-91b4-99ab-46fea6bb8d38";
-		}else if ("offTest".equals(command)) {
+		}else if ("lightOff".equals(command)) {
 			oid="0000000000000000_01077549133";
 			cmdName="switch";
 			cmd="OFF";
@@ -350,6 +367,7 @@ public class DashBoardService {
 					logger.debug("[getOnem2mData] response = {} ", reasonPhrase);
 					try {
 						String result = reasonPhrase;
+						System.out.println(result);
 						return result;
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -377,14 +395,31 @@ public class DashBoardService {
  * @throws Exception 
  */
 	public String ReadinitDatas() throws Exception {
-		String sensorsUrl = iotPlatformUrl + "/S" + oid + "/"+sensorName+"/la";
-		String lightUrl = iotPlatformUrl + "/S"+ oid + "/"+commandResultName+"/la";
-		String sensors = this.getOnem2mData(sensorsUrl, oid, accessToken);
-		String light = this.getOnem2mData(lightUrl, oid, accessToken);
-		JSONObject sensorsObj = JsonUtil.fromJson(sensors, JSONObject.class);
-		sensorsObj.put("light", light);
+		String lightUrl = "http://lottehotel.koreacentral.cloudapp.azure.com:38080/education/base/S0000000000000000_01077549133/lightsensor/la";
+		String weatherUrl = "http://lottehotel.koreacentral.cloudapp.azure.com:38080/education/base/S0000000000000000_01090672693/first/la";
+
+		//String lightUrl = iotPlatformUrl + "/S"+ oid + "/"+commandResultName+"/la";
+		String light = this.getOnem2mData(lightUrl, "0000000000000000_01077549133", "cbedf546-dd27-91b4-99ab-46fea6bb8d38");
+		String other = this.getOnem2mData(weatherUrl, "0000000000000000_01090672693", "be8cd513-df62-0112-ae39-f3a0bf6e0e5c");
+		JSONObject lightObj = JsonUtil.fromJson(light, JSONObject.class);
+		JSONObject otherObj = JsonUtil.fromJson(other, JSONObject.class);
+		//System.out.println(lightObj.get("light"));
+		JSONObject allObj= new JSONObject(); 
+		double dustDensity = (double)otherObj.get("dustDensity");
+		double temp = (double)otherObj.get("temp");
+		double hum = (double)otherObj.get("hum");
+		double human = (double)otherObj.get("human");
+
 		
-		return sensorsObj.toJSONString(); 
+		allObj.put("light", lightObj.get("light"));;
+		allObj.put("hum",hum);
+		allObj.put("temp",temp);
+		allObj.put("human",human);
+		allObj.put("dustDensity",dustDensity);
+		//sensorsObj.put("light", lightObj.get("light"));
+		//sensorsObj.put("soil", sensorsObj.get("light"));
+		
+		return allObj.toJSONString();//sensorsObj.toJSONString(); 
 	}
 	
 	/**

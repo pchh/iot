@@ -49,7 +49,7 @@
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="mainNav">
-		<a class="navbar-brand" href="index.html">LIFE Garden</a>
+		<a class="navbar-brand" href="/main">LIFE Garden</a>
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -103,7 +103,13 @@
 					            <li id="REH"> </li>
 					            <li class="weather-state-text"></li>
 					        </ul>
-					 		
+				            <img src="/resources/img/smartfarm.png" width ="80%" height="80%">
+				            <ul>
+					            <li id="temp"></li>
+					            <li id="hum"> </li>
+					            <li id="light"> </li>
+					            <li id="dustDensity"> </li>
+					 		</ul>
 						
 							
 					</div>
@@ -160,9 +166,13 @@
 						</style>
 						 -->
 						<script>
-						  $(function() { 
+						var a;
+						var audio;
+						  $(document).ready(function() {
+						  		//test();
+						  			  $(function() { 
 							// Setup the player to autoplay the next track
-							var a = audiojs.createAll({
+							 a = audiojs.createAll({
 							  trackEnded: function() {
 								var next = $('ol li.playing').next();
 								if (!next.length) next = $('ol li').first();
@@ -173,7 +183,7 @@
 							});
 							
 							// Load in the first track
-							var audio = a[0];
+							 audio = a[0];
 								first = $('ol a').attr('data-src');
 							$('ol li').first().addClass('playing');
 							audio.load(first);
@@ -200,10 +210,51 @@
 								prev.click();
 								// spacebar
 							  } else if (unicode == 32) {
+							  console.log("pasuyse");
 								audio.playPause();
 							  }
 							})
 						  });
+								setInterval(function(){ test(); }, 1000)();
+							});
+							  function test(){
+							  		jQuery.ajax({ 
+									type:"GET", 
+									url: '/initialize',
+									contentType:'application/json',
+									data: JSON.stringify(''),
+									success : function(resData) {
+									var jsonObj = JSON.parse(resData);
+							    	temperature_value = jsonObj.temperature;
+							    	humidity_value = jsonObj.humidity;
+							    	dust_value = jsonObj.dust;
+							    	light_value = jsonObj.light;
+							    	$('#temp').html('온도 : '+JSON.parse(resData).temp);
+							    	$('#hum').html('습도 : '+JSON.parse(resData).hum);
+							    	$('#light').html('조도 : '+JSON.parse(resData).light);
+							    	$('#dustDensity').html('미세먼지 : '+JSON.parse(resData).dustDensity);
+									console.log(resData);
+									console.log(JSON.parse(resData).light); 
+									console.log(JSON.parse(resData).hum); 
+									console.log(JSON.parse(resData).temp); 
+									console.log(JSON.parse(resData).dustDensity); 
+								
+									
+									if("1" == JSON.parse(resData).human){
+										audio.play();
+										console.log("HUMAN IN");
+									}else{
+										audio.play();
+										audio.playPause();
+										console.log("HUMAN OUT");
+									}	
+									
+								}, 
+								error : function(xhr, status, e) {
+									console.log(e);
+								} 
+							});
+						  }
 						</script>
 						</head>
 						

@@ -17,12 +17,13 @@
   <!-- Custom styles for this template-->
   <link href="/resources/css/sb-admin.css" rel="stylesheet">
   
+  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">커피주sss문</a>
+    <a class="navbar-brand" href="index.html">관리자페이지</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -103,7 +104,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal" id="classs">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
         </li>
       </ul>
@@ -121,89 +122,13 @@
       <!-- Icon Cards-->
            <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i>수정합니다 혜린이가 리스트!!!min</div>
-      		<div id="test">ttt</div>
       		<button id="ttttt">전구켜기</button>
       		<button id="offf">전구끄기</button>
       		<button id="waterOn">물주기</button>
       		<button id="waterOff">물끄기</button>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>설명</th>
-                  <th>Small</th>
-                  <th>Regular</th>
-                  <th>Large</th>
-                  <th>휘핑</th>
-                  <th>샷</th>
-                </tr>
-              </thead>
-              <tbody>
-	  		    #foreach ($item in $coffeeDTOList)
-	                <tr>
-	                  <td>$!{item.coffeeName}</td>
-	                  <td>$!{item.remark}</td>
-	                  <td>$!{item.sprice}</td>
-	                  <td>$!{item.mprice}</td>
-	                  <td>$!{item.lprice}</td>
-	                  <td>$!{item.creamYn}</td>
-	                  <td>$!{item.shotYn}</td>
-	                </tr>
-				#end
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
     <div class="card-body">
-        <form>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-1">
-                <label>커피명</label>
-                <input class="form-control" id="coffeeName" type="text" aria-describedby="nameHelp" placeholder="">
-              </div>
-              <div class="col-md-1">
-                <label>설명</label>
-                <input class="form-control" id="remark" type="text" aria-describedby="nameHelp" placeholder="">
-              </div>
-              <div class="col-md-1">
-                <label>small</label>
-                <input class="form-control" id="sprice" type="text" aria-describedby="nameHelp" placeholder="">
-              </div>
-              <div class="col-md-1">
-                <label>regular</label>
-                <input class="form-control" id="mprice" type="text" aria-describedby="nameHelp" placeholder="">
-              </div>
-              <div class="col-md-1">
-                <label>large</label>
-                <input class="form-control" id="lprice" type="text" aria-describedby="nameHelp" placeholder="">
-              </div>
-              <div class="col-md-1">
-                <label>휘핑여부</label>
-                <input class="form-control" id="creamYn" type="checkbox" placeholder="">
-              </div>
-              <div class="col-md-1">
-                <label>샷여부</label>
-                <input class="form-control" id="shotYn" type="checkbox" placeholder="">
-              </div>
-              <div class="col-md-2">
-                <label>판매시작일</label>
-                <input class="form-control" id="datepicker" type="text" placeholder="">
-              </div>
-              <div class="col-md-3">
-                <label>이미지</label>
-                <input class="form-control" id="image" type="file" name="upload" accept=".gif, .jpg , .png" onchange="this.select(); document.getElementById('filetext').value=document.selection.createRange().text.toString();">
-              </div>
-            </div>
-          </div>
-          <a id="btn-join" class="btn btn-primary btn-block">메뉴등록</a>
-        </form>
-      </div>
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
@@ -289,8 +214,6 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
   <script type="text/javascript">
   	var ctx = document.getElementById("myAreaChart");
 	var myLineChart = new Chart(ctx, {
@@ -473,7 +396,7 @@
   	})
   	
   		$(document).ready(function() {
-		connect();
+			connect();
 		});
   	function connect() {
 			var socket = new SockJS('/realtime');
@@ -546,6 +469,21 @@
   	})
   	jQuery("#waterOff").on("click", function(event) {
   		sendCommand("waterOff");
+  	})
+  	
+	jQuery("#classs").on("click", function(event) {
+		jQuery.ajax({ 
+			type:"GET", 
+			url: '/logout',
+			contentType:'application/json',
+			data: JSON.stringify(data),
+			success : function(resData) {
+				window.location.href = '/main'
+			}, 
+			error : function(xhr, status, e) {
+				console.log(e);
+			} 
+		});
   	})
 	function sendCommand(command){
 		var url = '/sendcommand';

@@ -1,6 +1,10 @@
 package com.lotte.coffee.controller;
 
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 //import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import com.lotte.coffee.service.DashBoardService;
@@ -36,7 +41,7 @@ public class DashBoardController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public void dashboard(@RequestBody String body, @RequestHeader HttpHeaders headers, @PathVariable String type) throws Exception {
 	    System.out.println(body);
-		String content = dashboardService.subscriptionParser(body);
+		String content = dashboardService.subscriptionParser(body, type);
 		if (content.equals("delete")) {
 		} else {
 			HttpEntity<String> entity = new HttpEntity<String>(content, headers);
@@ -44,7 +49,6 @@ public class DashBoardController {
 		}
 		
 	}
-
 
 	
 	@RequestMapping(value = "/sendcommand", method = RequestMethod.PUT)

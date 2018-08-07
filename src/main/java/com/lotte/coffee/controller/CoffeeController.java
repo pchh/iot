@@ -228,6 +228,9 @@ public class CoffeeController {
 		return mav;
 	}
 
+
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/trace", method=RequestMethod.GET)
 	public ModelAndView trace(HttpSession session , @RequestParam Map<String, String> param){
@@ -238,5 +241,11 @@ public class CoffeeController {
 		mav.setViewName("trace");
 		return mav;
 	}
-	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public ModelAndView logout(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		session.invalidate();
+		mav.setViewName("hello");
+		return mav;
+	}
 }
