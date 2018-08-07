@@ -172,9 +172,7 @@
 				<!-- 댓글영역  -->
 
 
-				<a href="/board/001" class="btn btn-default">목록으로</a> <a
-					href="/admin/products/edit" class="btn btn-primary">수정</a>
-
+				<a href="/board/001" class="btn btn-default">목록으로</a>
 				<!--ajax client부분-->
 				<script>
 					$(document)
